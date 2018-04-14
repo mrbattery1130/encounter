@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="top"
+    android:orientation="vertical"
+    tools:context=".UserDetailActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_gravity="top"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="top"
+            android:orientation="vertical">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                android:layout_gravity="bottom">
+
+                <ImageView
+                    android:id="@+id/iv_cover"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/main_color_dark"
+                    android:src="@drawable/default_cover"
+                    android:scaleType="centerCrop" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:orientation="vertical"
+                    android:paddingBottom="16dp"
+                    android:paddingHorizontal="16dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:elevation="2dp"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical">
+
+                            <com.makeramen.roundedimageview.RoundedImageView
+                                android:id="@+id/riv_avatar"
+                                android:layout_width="48dp"
+                                android:layout_height="48dp"
+                                android:src="@drawable/default_avatar"
+                                app:riv_oval="true"/>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="8dp"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:id="@+id/tv_user_name"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="未设置昵称"
+                                    android:textColor="@color/text_white"
+                                    android:textSize="@dimen/text_large"
+                                    android:layout_marginBottom="8dp"/>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:id="@+id/tv_gender"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="未知性别"
+                                        android:textColor="@color/text_white"
+                                        android:textSize="@dimen/text_small" />
+
+                                    <TextView
+                                        android:id="@+id/tv_constellation"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginLeft="8sp"
+                                        android:text="未知星座"
+                                        android:textColor="@color/text_white"
+                                        android:textSize="@dimen/text_small" />
+                                </LinearLayout>
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <TextView
+                            android:id="@+id/tv_script"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="未设置签名"
+                            android:textColor="@color/text_white"
+                            android:textSize="@dimen/text_small"
+                            android:lineSpacingMultiplier="1.5"
+                            android:layout_marginTop="8dp"/>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </FrameLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="48sp"
+                        android:layout_height="wrap_content"
+                        android:text="倾盖ID"
+                        android:textColor="@color/main_color_dark"
+                        android:textSize="@dimen/text_small" />
+
+                    <TextView
+                        android:id="@+id/tv_user_id"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="00000"
+                        android:textColor="@color/text_black"
+                        android:textSize="@dimen/text_big" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="48sp"
+                        android:layout_height="wrap_content"
+                        android:text="昵称"
+                        android:textColor="@color/main_color_dark"
+                        android:textSize="@dimen/text_small" />
+
+                    <TextView
+                        android:id="@id/tv_user_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="未设置昵称"
+                        android:textColor="@color/text_black"
+                        android:textSize="@dimen/text_big" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="48sp"
+                        android:layout_height="wrap_content"
+                        android:text="标签"
+                        android:textColor="@color/main_color_dark"
+                        android:textSize="@dimen/text_small" />
+
+                    <TextView
+                        android:id="@+id/label"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:lineSpacingMultiplier="1.5"
+                        android:text="运动：滑雪，游泳，慢跑\n电影：文艺片，动作片，纪录片\n饮食：可乐，比萨，红烧肉\n歌手：周杰伦，林俊杰，李荣浩"
+                        android:textColor="@color/text_black"
+                        android:textSize="@dimen/text_big" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <Button
+        android:id="@+id/btn_chat"
+        android:layout_width="match_parent"
+        android:layout_height="48sp"
+        android:background="@color/main_color_dark"
+        android:text="聊一聊"
+        android:textColor="@color/text_white"
+        android:textSize="@dimen/text_big" />
+
+</LinearLayout>

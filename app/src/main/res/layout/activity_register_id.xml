@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    tools:context=".RegisterIDActivity">
+
+    <ScrollView
+        android:id="@+id/login_form"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="40dp"
+        android:paddingRight="40dp">
+
+        <LinearLayout
+            android:id="@+id/email_login_form"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:src="@drawable/logo" />
+
+
+            <TextView
+                android:id="@+id/tv_welcome"
+                android:layout_width="wrap_content"
+                android:layout_height="40sp"
+                android:layout_gravity="center"
+                android:layout_marginTop="40dp"
+                android:hint="欢迎！"
+                android:textSize="@dimen/text_big" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="40sp"
+                android:layout_gravity="center"
+                android:layout_marginTop="16dp"
+                android:hint="你的倾盖ID是"
+                android:textSize="@dimen/text_big" />
+
+
+            <com.mrbattery.encounter.font.FontTextView
+                android:id="@+id/tv_user_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="8dp"
+                android:paddingLeft="16dp"
+                android:text="0000"
+                android:textAlignment="center"
+                android:textColor="@color/main_color_dark"
+                android:textSize="64dp" />
+
+            <Button
+                android:id="@+id/encounter_button"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="match_parent"
+                android:layout_height="40sp"
+                android:layout_marginTop="32dp"
+                android:background="@drawable/sign_in_btn"
+                android:text="@string/action_encounter"
+                android:textColor="@color/text_white"
+                android:textSize="@dimen/text_big" />
+
+        </LinearLayout>
+    </ScrollView>
+
+
+</FrameLayout>

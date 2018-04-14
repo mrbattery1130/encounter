@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical"
+    tools:context=".EditProfileActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?android:attr/actionBarSize"
+        android:background="?android:attr/colorPrimary"
+        app:layout_collapseMode="pin"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginRight="16dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/iv_close"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginRight="8dp"
+                android:src="@drawable/close" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/title_activity_edit_profile"
+                android:textColor="@color/text_white"
+                android:textSize="20sp" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <ImageView
+                android:id="@+id/iv_okay"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:src="@drawable/okay" />
+        </LinearLayout>
+    </android.support.v7.widget.Toolbar>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="180dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/default_cover" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom|right"
+                        android:layout_margin="16dp"
+                        android:src="@drawable/edit_cover" />
+                </FrameLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="32dp"
+                    android:paddingTop="40dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="48sp"
+                            android:layout_height="wrap_content"
+                            android:text="@string/user_id"
+                            android:textColor="@color/main_color_dark"
+                            android:textSize="@dimen/text_small" />
+
+                        <EditText
+                            android:id="@+id/tv_user_id"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:focusable="false"
+                            android:text="1000"
+                            android:textColor="@color/text_gray"
+                            android:textSize="@dimen/text_big" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="48sp"
+                            android:layout_height="wrap_content"
+                            android:text="@string/user_name"
+                            android:textColor="@color/main_color_dark"
+                            android:textSize="@dimen/text_small" />
+
+                        <EditText
+                            android:id="@+id/tv_user_name"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="未设置昵称"
+                            android:textColor="@color/text_black"
+                            android:textSize="@dimen/text_big" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="48sp"
+                            android:layout_height="wrap_content"
+                            android:text="@string/gender"
+                            android:textColor="@color/main_color_dark"
+                            android:textSize="@dimen/text_small" />
+
+                        <RadioGroup
+                            android:id="@+id/rg_gender"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <RadioButton
+                                android:id="@+id/rb_male"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:checked="true"
+                                android:text="男"
+                                android:textColor="@color/text_black"
+                                android:textSize="@dimen/text_big" />
+
+                            <RadioButton
+                                android:id="@+id/rb_female"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="16dp"
+                                android:text="女"
+                                android:textColor="@color/text_black"
+                                android:textSize="@dimen/text_big" />
+                        </RadioGroup>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="48sp"
+                            android:layout_height="wrap_content"
+                            android:text="@string/constellation"
+                            android:textColor="@color/main_color_dark"
+                            android:textSize="@dimen/text_small" />
+
+                        <EditText
+                            android:id="@+id/tv_constellation"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:focusable="false"
+                            android:text="未知星座"
+                            android:textColor="@color/text_black"
+                            android:textSize="@dimen/text_big" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="48sp"
+                            android:layout_height="wrap_content"
+                            android:text="@string/script"
+                            android:textColor="@color/main_color_dark"
+                            android:textSize="@dimen/text_small" />
+
+                        <EditText
+                            android:id="@+id/tv_script"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text=""
+                            android:textColor="@color/text_black"
+                            android:textSize="@dimen/text_big"
+                            android:lineSpacingMultiplier="1.2"/>
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="140dp">
+
+                <com.makeramen.roundedimageview.RoundedImageView
+                    android:id="@+id/iv_avatar"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:src="@drawable/default_avatar"
+                    app:riv_border_color="@android:color/white"
+                    app:riv_border_width="2dp"
+                    app:riv_oval="true" />
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="right|bottom"
+                    android:src="@drawable/edit_profile_photo"/>
+            </FrameLayout>
+        </FrameLayout>
+    </ScrollView>
+
+</LinearLayout>

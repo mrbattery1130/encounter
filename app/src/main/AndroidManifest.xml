@@ -2,20 +2,42 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.mrbattery.encounter">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/icon_encounter"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/icon_encounter"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/title_activity_main"
+            android:theme="@style/AppTheme">
+
+            <!--
+                <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            -->
+        </activity>
+        <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".UserDetailActivity"
+            android:label="详细资料" />
+        <activity android:name=".EditProfileActivity" />
+        <activity android:name=".RegisterNameActivity" />
+        <activity android:name=".RegisterPasswordActivity" />
+        <activity android:name=".RegisterIDActivity"></activity>
     </application>
 
 </manifest>
