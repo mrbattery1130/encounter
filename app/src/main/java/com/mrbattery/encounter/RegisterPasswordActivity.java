@@ -8,6 +8,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.mrbattery.encounter.constant.Constant;
 import com.mrbattery.encounter.entity.User;
 import com.mrbattery.encounter.util.HttpUtil;
 

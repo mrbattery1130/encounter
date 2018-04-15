@@ -37,7 +37,9 @@
         <activity android:name=".EditProfileActivity" />
         <activity android:name=".RegisterNameActivity" />
         <activity android:name=".RegisterPasswordActivity" />
-        <activity android:name=".RegisterIDActivity"></activity>
+        <activity android:name=".RegisterIDActivity" />
+        <activity android:name=".EPQActivity" />
+        <activity android:name=".ChooseConstellationActivity"></activity>
     </application>
 
 </manifest>

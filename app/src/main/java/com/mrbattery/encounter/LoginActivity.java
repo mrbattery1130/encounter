@@ -4,33 +4,20 @@ import android.app.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
-import android.support.v7.app.AppCompatActivity;
-import android.text.Editable;
 import android.util.Log;
 import android.view.View;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
+import com.mrbattery.encounter.constant.Constant;
 import com.mrbattery.encounter.util.HttpUtil;
-import com.mrbattery.encounter.util.ToastUtil;
-
-import java.io.IOException;
-import java.util.concurrent.CountDownLatch;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
 
 import static com.makeramen.roundedimageview.RoundedDrawable.TAG;
 
@@ -92,6 +79,7 @@ public class LoginActivity extends Activity {
                 loginOverlay.setVisibility(View.INVISIBLE);
                 loginOverlay.setClickable(false);
                 if (responseData.equals("success")) {
+                    Log.i(TAG, "run: login successful!!!");
                     Constant.setCurrUserID(userID);
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                     startActivity(intent);
@@ -100,6 +88,7 @@ public class LoginActivity extends Activity {
                 } else if (responseData.equals("incorrect_password")){
                     Toast.makeText(LoginActivity.this, "密码错误", Toast.LENGTH_SHORT).show();
                 }else {
+                    Log.i(TAG, "run: some error occured!!!");
                     Toast.makeText(LoginActivity.this, "登录失败", Toast.LENGTH_SHORT).show();
                 }
             }

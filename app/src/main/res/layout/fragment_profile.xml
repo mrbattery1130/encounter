@@ -243,47 +243,85 @@
                             android:layout_height="wrap_content"
                             android:orientation="horizontal">
 
-                            <com.mrbattery.encounter.font.FontTextView
-                                android:id="@+id/tv_e_score"
-                                android:layout_width="wrap_content"
+                            <LinearLayout
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:gravity="center"
-                                android:text="e65"
-                                android:textAllCaps="true"
-                                android:textColor="@color/main_color_dark"
-                                android:textSize="40sp" />
+                                android:gravity="center">
+                                <com.mrbattery.encounter.font.FontTextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="e"
+                                    android:textAllCaps="true"
+                                    android:textColor="@color/main_color_dark"
+                                    android:textSize="40sp" />
 
-                            <com.mrbattery.encounter.font.FontTextView
-                                android:id="@+id/tv_n_score"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:gravity="center"
-                                android:text="n43"
-                                android:textAllCaps="true"
-                                android:textColor="@color/main_color_dark"
-                                android:textSize="40sp" />
+                                <com.mrbattery.encounter.font.FontTextView
+                                    android:id="@+id/tv_e_score"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="0"
+                                    android:textAllCaps="true"
+                                    android:textColor="@color/main_color_dark"
+                                    android:textSize="40sp" />
+                            </LinearLayout>
 
-                            <com.mrbattery.encounter.font.FontTextView
-                                android:id="@+id/tv_p_score"
-                                android:layout_width="wrap_content"
+                            <LinearLayout
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:gravity="center"
-                                android:text="p37"
-                                android:textAllCaps="true"
-                                android:textColor="@color/main_color_dark"
-                                android:textSize="40sp" />
+                                android:gravity="center">
+                                <com.mrbattery.encounter.font.FontTextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="n"
+                                    android:textAllCaps="true"
+                                    android:textColor="@color/main_color_dark"
+                                    android:textSize="40sp" />
+
+                                <com.mrbattery.encounter.font.FontTextView
+                                    android:id="@+id/tv_n_score"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="0"
+                                    android:textAllCaps="true"
+                                    android:textColor="@color/main_color_dark"
+                                    android:textSize="40sp" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="center">
+                                <com.mrbattery.encounter.font.FontTextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="p"
+                                    android:textAllCaps="true"
+                                    android:textColor="@color/main_color_dark"
+                                    android:textSize="40sp" />
+
+                                <com.mrbattery.encounter.font.FontTextView
+                                    android:id="@+id/tv_p_score"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="0"
+                                    android:textAllCaps="true"
+                                    android:textColor="@color/main_color_dark"
+                                    android:textSize="40sp" />
+                            </LinearLayout>
+
                         </LinearLayout>
 
                         <TextView
+                            android:id="@+id/tv_result_analyse"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="16dp"
+                            android:text="@string/error_no_test_record"
                             android:lineSpacingMultiplier="1.5"
                             android:paddingBottom="16dp"
-                            android:text="人格外向，可能是好交际，渴望刺激和冒险，情感易于冲动。情绪反应缓慢且轻缓，很容易恢复平静，稳重、性情温和、善于自我控制。能与人相处，能较好地适应环境，态度温和、不粗暴、善从人意。"
                             android:textColor="@color/text_black" />
 
                     </LinearLayout>
@@ -345,7 +383,7 @@
                             android:layout_height="wrap_content"
                             android:lineSpacingMultiplier="1.5"
                             android:paddingBottom="16dp"
-                            android:text="运动：滑雪，游泳，慢跑\n电影：文艺片，动作片，纪录片\n饮食：可乐，比萨，红烧肉\n歌手：周杰伦，林俊杰，李荣浩"
+                            android:text="@string/error_no_keyword"
                             android:textColor="@color/text_black"
                             android:textSize="@dimen/text_big" />
                     </LinearLayout>

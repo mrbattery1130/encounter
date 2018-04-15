@@ -5,12 +5,13 @@ import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.widget.EditText;
 import android.widget.RadioButton;
-import android.widget.TextView;
 import android.widget.Toast;
 
+import com.mrbattery.encounter.constant.Constant;
 import com.mrbattery.encounter.entity.User;
 import com.mrbattery.encounter.util.HttpUtil;
 
@@ -37,6 +38,8 @@ public class EditProfileActivity extends AppCompatActivity {
     RadioButton rbMale;
     @BindView(R.id.rb_female)
     RadioButton rbFemale;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
 
     User user;
 
@@ -45,9 +48,12 @@ public class EditProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_profile);
         ButterKnife.bind(this);
+        setSupportActionBar(toolbar);
 
         //接受上一个Activity传来的数据
         user = (User) getIntent().getSerializableExtra("user");
+        Constant.setCurrConstellation(user.getConstellation());
+
         initProfile();
     }
 
@@ -76,13 +82,13 @@ public class EditProfileActivity extends AppCompatActivity {
         } else if (rbFemale.isChecked()) {
             gender = Constant.FEMALE;
         } else {
-            gender = Constant.UNKNOWGENDER;
+            gender = Constant.UNKNOWNGENDER;
         }
         String userName = String.valueOf(tvUserName.getText());
         String script = String.valueOf(tvScript.getText());
         try {
-            userName = URLEncoder.encode(userName,"utf-8");
-            script = URLEncoder.encode(script,"utf-8");
+            userName = URLEncoder.encode(userName, "utf-8");
+            script = URLEncoder.encode(script, "utf-8");
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
@@ -90,7 +96,7 @@ public class EditProfileActivity extends AppCompatActivity {
                 "userID=" + tvUserID.getText()
                 + "&userName=" + userName
                 + "&gender=" + gender
-                + "&constellation=" + Constant.getConstellationIndex(String.valueOf(tvConstellation.getText()))
+                + "&constellation=" + Constant.getCurrConstellation()
                 + "&script=" + script;
         Log.i(TAG, url);
 
@@ -117,6 +123,12 @@ public class EditProfileActivity extends AppCompatActivity {
 
     }
 
+    @OnClick(R.id.tv_constellation)
+    public void chooseConstellation() {
+        Intent intent = new Intent(EditProfileActivity.this, ChooseConstellationActivity.class);
+        startActivity(intent);
+    }
+
     @OnClick(R.id.iv_close)
     public void cancel() {
         new AlertDialog.Builder(this)
@@ -135,5 +147,11 @@ public class EditProfileActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         cancel();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        tvConstellation.setText(Constant.getConstellationName(Constant.getCurrConstellation()));
     }
 }

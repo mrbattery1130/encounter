@@ -9,6 +9,10 @@ public class User implements Serializable {
     private int gender;
     private int constellation;
     private String script;
+    private double eScore;
+    private double nScore;
+    private double pScore;
+    private double lScore;
 
     public int getUserID() {
         return userID;
@@ -56,5 +60,53 @@ public class User implements Serializable {
 
     public void setScript(String script) {
         this.script = script;
+    }
+
+    public double geteScore() {
+        return eScore;
+    }
+
+    public void seteScore(double eScore) {
+        this.eScore = eScore;
+    }
+
+    public double getnScore() {
+        return nScore;
+    }
+
+    public void setnScore(double nScore) {
+        this.nScore = nScore;
+    }
+
+    public double getpScore() {
+        return pScore;
+    }
+
+    public void setpScore(double pScore) {
+        this.pScore = pScore;
+    }
+
+    public double getlScore() {
+        return lScore;
+    }
+
+    public void setlScore(double lScore) {
+        this.lScore = lScore;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "userID=" + userID +
+                ", userName='" + userName + '\'' +
+                ", password='" + password + '\'' +
+                ", gender=" + gender +
+                ", constellation=" + constellation +
+                ", script='" + script + '\'' +
+                ", eScore=" + eScore +
+                ", nScore=" + nScore +
+                ", pScore=" + pScore +
+                ", lScore=" + lScore +
+                '}';
     }
 }

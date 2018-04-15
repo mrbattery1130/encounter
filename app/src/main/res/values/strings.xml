@@ -13,7 +13,7 @@
     <string name="script">签名</string>
 
     <!--网络url-->
-    <string name="server_ip">192.168.1.105</string>
+    <string name="server_ip">10.236.196.112</string>
 
     <!-- Strings related to login -->
     <string name="prompt_email">请输入倾盖ID</string>
@@ -23,6 +23,8 @@
     <string name="action_sign_in">登录</string>
     <string name="action_sign_up">注册</string>
     <string name="action_next">下一步</string>
+    <string name="action_start_test">开始测试</string>
+    <string name="action_confirm">确定</string>
     <string name="action_cancel">取消</string>
     <string name="action_encounter">开启倾盖之旅</string>
     <string name="action_forget_password">忘记密码</string>
@@ -31,11 +33,29 @@
     <string name="error_incorrect_password">密码不正确</string>
     <string name="error_mismatching_password">两次密码不一致</string>
     <string name="error_field_required">输入不能为空，请检查</string>
-    <string name="permission_rationale">"Contacts permissions are needed for providing email
-        completions."</string>
+    <string name="error_no_test_record">没有测试记录！点击开始测试</string>
+    <string name="error_no_keyword">没有选择话题标签！点击开始选择</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email completions."</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_edit_profile">修改个人资料</string>
+    <string name="title_activity_epq">EPQ测试</string>
+    <string name="title_activity_constellation">选择星座</string>
 
+    <string name="epq_introduction">艾森克人格问卷(简称EPQ)是英国伦敦大学心理系和精神病研究所艾森克教授编制的, 他搜集了大量数据，通过因素分析归纳提出决定人格的三个基本因素: 内外向性(E)、情绪性(N)和精神质(P), 人们在这三方面的不同倾向和不同表现程度, 便构成了不同的人格特征。</string>
+
+    <string name="constellation01">白羊座</string>
+    <string name="constellation02">金牛座</string>
+    <string name="constellation03">双子座</string>
+    <string name="constellation04">巨蟹座</string>
+    <string name="constellation05">狮子座</string>
+    <string name="constellation06">处女座</string>
+    <string name="constellation07">天秤座</string>
+    <string name="constellation08">天蝎座</string>
+    <string name="constellation09">射手座</string>
+    <string name="constellation10">摩羯座</string>
+    <string name="constellation11">水瓶座</string>
+    <string name="constellation12">双鱼座</string>
+    <string name="constellation00">未知星座</string>
 </resources>

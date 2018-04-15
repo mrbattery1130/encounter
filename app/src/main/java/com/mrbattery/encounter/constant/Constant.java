@@ -1,35 +1,39 @@
-package com.mrbattery.encounter;
+package com.mrbattery.encounter.constant;
+
+import com.mrbattery.encounter.R;
 
 public class Constant {
     //当前用户ID
     private static int currUserID;
+    //当前用户星座
+    private static int currConstellation;
 
     //十二星座
-    private static String unknowConstellation = "位置星座";
-    private static final String Aries = "白羊座";
-    private static final String Taurus = "金牛座";
-    private static final String Gemini = "双子座";
-    private static final String Cancer = "巨蟹座";
-    private static final String Leo = "狮子座";
-    private static final String Virgo = "处女座";
-    private static final String Libra = "天秤座";
-    private static final String Scorpio = "天蝎座";
-    private static final String Sagittarius = "射手座";
-    private static final String Capricorn = "摩羯座";
-    private static final String Aquarius = "水瓶座";
-    private static final String Pisces = "双鱼座";
+    public static final String unknownConstellation = "未知星座";
+    public static final String Aries = "白羊座";
+    public static final String Taurus = "金牛座";
+    public static final String Gemini = "双子座";
+    public static final String Cancer = "巨蟹座";
+    public static final String Leo = "狮子座";
+    public static final String Virgo = "处女座";
+    public static final String Libra = "天秤座";
+    public static final String Scorpio = "天蝎座";
+    public static final String Sagittarius = "射手座";
+    public static final String Capricorn = "摩羯座";
+    public static final String Aquarius = "水瓶座";
+    public static final String Pisces = "双鱼座";
 
     //性别
-    private static String male = "男";
-    private static String female = "女";
-    private static String unknowGender = "未知性别";
+    public static String male = "男";
+    public static String female = "女";
+    public static String unknownGender = "未知性别";
     public static final int MALE = 1;
     public static final int FEMALE = 2;
-    public static final int UNKNOWGENDER = 0;
+    public static final int UNKNOWNGENDER = 0;
 
     //性别图标资源
-    private static int maleSrc = R.drawable.ic_gender_male;
-    private static int femaleSrc = R.drawable.ic_gender_female;
+    public static int maleSrc = R.drawable.ic_gender_male;
+    public static int femaleSrc = R.drawable.ic_gender_female;
 
     /**
      * 性别序号转换为性别名
@@ -44,7 +48,7 @@ public class Constant {
             case 2:
                 return female;
             default:
-                return unknowGender;
+                return unknownGender;
         }
     }
 
@@ -99,7 +103,7 @@ public class Constant {
             case 12:
                 return Pisces;
             default:
-                return unknowConstellation;
+                return unknownConstellation;
         }
     }
 
@@ -140,6 +144,14 @@ public class Constant {
 
     public static void setCurrUserID(int currUserID) {
         Constant.currUserID = currUserID;
+    }
+
+    public static int getCurrConstellation() {
+        return currConstellation;
+    }
+
+    public static void setCurrConstellation(int currConstellation) {
+        Constant.currConstellation = currConstellation;
     }
 
     //String类型的userID的set方法

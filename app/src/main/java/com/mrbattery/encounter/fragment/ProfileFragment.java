@@ -1,12 +1,9 @@
 package com.mrbattery.encounter.fragment;
 
-import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -17,18 +14,13 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-import com.mrbattery.encounter.Constant;
+import com.mrbattery.encounter.EPQActivity;
+import com.mrbattery.encounter.constant.Constant;
 import com.mrbattery.encounter.EditProfileActivity;
-import com.mrbattery.encounter.LoginActivity;
-import com.mrbattery.encounter.MainActivity;
 import com.mrbattery.encounter.R;
+import com.mrbattery.encounter.constant.EPQTest;
 import com.mrbattery.encounter.entity.User;
 import com.mrbattery.encounter.util.HttpUtil;
-
-import java.io.Serializable;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -53,6 +45,16 @@ public class ProfileFragment extends Fragment {
     TextView tvConstellation;
     @BindView(R.id.tv_script)
     TextView tvScript;
+
+    @BindView(R.id.tv_e_score)
+    TextView tvEScore;
+    @BindView(R.id.tv_n_score)
+    TextView tvNScore;
+    @BindView(R.id.tv_p_score)
+    TextView tvPScore;
+
+    @BindView(R.id.tv_result_analyse)
+    TextView tvResultAnalyse;
 
     private Unbinder unbinder;
     User user;
@@ -92,6 +94,11 @@ public class ProfileFragment extends Fragment {
                 tvConstellation.setText(Constant.getConstellationName(user.getConstellation()));
                 tvScript.setText(user.getScript());
                 ivGender.setImageResource(Constant.getGenderSrc(user.getGender()));
+
+                tvEScore.setText(String.valueOf((int) user.geteScore()));
+                tvNScore.setText(String.valueOf((int) user.getnScore()));
+                tvPScore.setText(String.valueOf((int) user.getpScore()));
+                tvResultAnalyse.setText(EPQTest.resultAnalyse(user.geteScore(), user.getnScore(), user.getpScore(), user.getlScore()));
             }
         });
     }
@@ -105,6 +112,12 @@ public class ProfileFragment extends Fragment {
         //传递user对象
         bundle.putSerializable("user", user);
         intent.putExtras(bundle);
+        startActivity(intent);
+    }
+
+    @OnClick(R.id.cv_epq)
+    public void startEPQ(){
+        Intent intent = new Intent(getContext(), EPQActivity.class);
         startActivity(intent);
     }
 

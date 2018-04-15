@@ -109,6 +109,11 @@ public class HttpUtil {
         Log.d(RoundedDrawable.TAG, "constellation: " + u.getConstellation());
         Log.d(RoundedDrawable.TAG, "script: " + u.getScript());
 
+        Log.d(RoundedDrawable.TAG, "eScore: " + u.geteScore());
+        Log.d(RoundedDrawable.TAG, "nScore: " + u.getnScore());
+        Log.d(RoundedDrawable.TAG, "pScore: " + u.getpScore());
+        Log.d(RoundedDrawable.TAG, "lScore: " + u.getlScore());
+
         return u;
 
     }

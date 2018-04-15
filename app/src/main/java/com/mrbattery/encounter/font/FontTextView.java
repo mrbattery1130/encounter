@@ -7,7 +7,7 @@ import android.widget.TextView;
 public class FontTextView extends android.support.v7.widget.AppCompatTextView {
     public FontTextView(Context context, AttributeSet attributeSet){
         super(context,attributeSet);
-        //init(context);
+        init(context);
     }
 
     private void init(Context context) {

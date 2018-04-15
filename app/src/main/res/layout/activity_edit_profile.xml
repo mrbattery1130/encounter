@@ -110,6 +110,8 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:focusable="false"
+                            android:clickable="false"
+                            android:longClickable="false"
                             android:text="1000"
                             android:textColor="@color/text_gray"
                             android:textSize="@dimen/text_big" />
@@ -201,6 +203,7 @@
                             android:layout_weight="1"
                             android:focusable="false"
                             android:text="未知星座"
+                            android:longClickable="false"
                             android:textColor="@color/text_black"
                             android:textSize="@dimen/text_big" />
                     </LinearLayout>
