@@ -123,7 +123,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:visibility="visible">
+            android:visibility="gone">
 
             <ScrollView
                 android:layout_width="match_parent"
@@ -226,7 +226,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:visibility="gone">
+            android:visibility="visible">
 
             <ScrollView
                 android:layout_width="match_parent"
@@ -272,38 +272,75 @@
                                     android:layout_height="wrap_content"
                                     android:orientation="horizontal">
 
-                                    <com.mrbattery.encounter.font.FontTextView
-                                        android:id="@+id/tv_e_score"
-                                        android:layout_width="wrap_content"
+                                    <LinearLayout
+                                        android:layout_width="0dp"
                                         android:layout_height="wrap_content"
                                         android:layout_weight="1"
-                                        android:gravity="center"
-                                        android:text="e65"
-                                        android:textAllCaps="true"
-                                        android:textColor="@color/main_color_dark"
-                                        android:textSize="40sp" />
+                                        android:gravity="center">
+                                        <com.mrbattery.encounter.font.FontTextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="e"
+                                            android:textAllCaps="true"
+                                            android:textColor="@color/main_color_dark"
+                                            android:textSize="40sp" />
 
-                                    <com.mrbattery.encounter.font.FontTextView
-                                        android:id="@+id/tv_n_score"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_weight="1"
-                                        android:gravity="center"
-                                        android:text="n43"
-                                        android:textAllCaps="true"
-                                        android:textColor="@color/main_color_dark"
-                                        android:textSize="40sp" />
+                                        <com.mrbattery.encounter.font.FontTextView
+                                            android:id="@+id/tv_e_score"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="0"
+                                            android:textAllCaps="true"
+                                            android:textColor="@color/main_color_dark"
+                                            android:textSize="40sp" />
+                                    </LinearLayout>
 
-                                    <com.mrbattery.encounter.font.FontTextView
-                                        android:id="@+id/tv_p_score"
-                                        android:layout_width="wrap_content"
+                                    <LinearLayout
+                                        android:layout_width="0dp"
                                         android:layout_height="wrap_content"
                                         android:layout_weight="1"
-                                        android:gravity="center"
-                                        android:text="p37"
-                                        android:textAllCaps="true"
-                                        android:textColor="@color/main_color_dark"
-                                        android:textSize="40sp" />
+                                        android:gravity="center">
+                                        <com.mrbattery.encounter.font.FontTextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="n"
+                                            android:textAllCaps="true"
+                                            android:textColor="@color/main_color_dark"
+                                            android:textSize="40sp" />
+
+                                        <com.mrbattery.encounter.font.FontTextView
+                                            android:id="@+id/tv_n_score"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="0"
+                                            android:textAllCaps="true"
+                                            android:textColor="@color/main_color_dark"
+                                            android:textSize="40sp" />
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:gravity="center">
+                                        <com.mrbattery.encounter.font.FontTextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="p"
+                                            android:textAllCaps="true"
+                                            android:textColor="@color/main_color_dark"
+                                            android:textSize="40sp" />
+
+                                        <com.mrbattery.encounter.font.FontTextView
+                                            android:id="@+id/tv_p_score"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="0"
+                                            android:textAllCaps="true"
+                                            android:textColor="@color/main_color_dark"
+                                            android:textSize="40sp" />
+                                    </LinearLayout>
+
                                 </LinearLayout>
 
 

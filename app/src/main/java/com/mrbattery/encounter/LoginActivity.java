@@ -42,7 +42,7 @@ public class LoginActivity extends Activity {
     private long firstTime = 0;
 
     //全局变量
-    private  String userID;
+    private String userID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,10 +70,12 @@ public class LoginActivity extends Activity {
         Log.i(TAG, url);
 
         //异步请求+回调
+        Log.i(TAG, "signIn: 开始请求数据");
         HttpUtil.getDataAsync(url, this, new Runnable() {
             @Override
             public void run() {
                 String responseData = HttpUtil.getResponseData();
+                Log.i(TAG, "run: " + responseData);
                 //隐藏加载进度条和遮罩
                 loginProgress.setVisibility(View.INVISIBLE);
                 loginOverlay.setVisibility(View.INVISIBLE);
@@ -85,19 +87,22 @@ public class LoginActivity extends Activity {
                     startActivity(intent);
                 } else if (responseData.equals("invalid_user_id")) {
                     Toast.makeText(LoginActivity.this, "用户不存在", Toast.LENGTH_SHORT).show();
-                } else if (responseData.equals("incorrect_password")){
+                } else if (responseData.equals("incorrect_password")) {
                     Toast.makeText(LoginActivity.this, "密码错误", Toast.LENGTH_SHORT).show();
-                }else {
+                } else if (responseData.equals("network_error")) {
+                    Toast.makeText(LoginActivity.this, "网络错误，请稍后重试", Toast.LENGTH_SHORT).show();
+                } else {
                     Log.i(TAG, "run: some error occured!!!");
                     Toast.makeText(LoginActivity.this, "登录失败", Toast.LENGTH_SHORT).show();
                 }
             }
+
         });
 
     }
 
     @OnClick(R.id.sign_up_button)
-    public void signUp(){
+    public void signUp() {
         Intent intent = new Intent(LoginActivity.this, RegisterNameActivity.class);
         startActivity(intent);
     }

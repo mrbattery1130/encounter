@@ -1,6 +1,8 @@
 package com.mrbattery.encounter.fragment;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
@@ -11,6 +13,8 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -20,6 +24,7 @@ import com.mrbattery.encounter.EditProfileActivity;
 import com.mrbattery.encounter.R;
 import com.mrbattery.encounter.constant.EPQTest;
 import com.mrbattery.encounter.entity.User;
+import com.mrbattery.encounter.util.AnimationUtil;
 import com.mrbattery.encounter.util.HttpUtil;
 
 import butterknife.BindView;
@@ -45,6 +50,11 @@ public class ProfileFragment extends Fragment {
     TextView tvConstellation;
     @BindView(R.id.tv_script)
     TextView tvScript;
+
+    @BindView(R.id.iv_avatar)
+    ImageView ivAvatar;
+    @BindView(R.id.iv_cover)
+    ImageView ivCover;
 
     @BindView(R.id.tv_e_score)
     TextView tvEScore;
@@ -89,16 +99,38 @@ public class ProfileFragment extends Fragment {
             @Override
             public void run() {
                 user = HttpUtil.parseJSONWithGSON();
+                //个人信息卡片
                 tvUserID.setText(String.valueOf(user.getUserID()));
                 tvUserName.setText(user.getUserName());
                 tvConstellation.setText(Constant.getConstellationName(user.getConstellation()));
                 tvScript.setText(user.getScript());
                 ivGender.setImageResource(Constant.getGenderSrc(user.getGender()));
-
+                //EPQ测试卡片
                 tvEScore.setText(String.valueOf((int) user.geteScore()));
                 tvNScore.setText(String.valueOf((int) user.getnScore()));
                 tvPScore.setText(String.valueOf((int) user.getpScore()));
                 tvResultAnalyse.setText(EPQTest.resultAnalyse(user.geteScore(), user.getnScore(), user.getpScore(), user.getlScore()));
+
+                //加载头像图片资源
+                String avatarUrl = user.getAvatar();
+                HttpUtil.getPictureAsync(avatarUrl, getContext(), new Runnable() {
+                    @Override
+                    public void run() {
+                        Bitmap avatarBmp = HttpUtil.getResponseBmp();
+                        ivAvatar.setImageBitmap(avatarBmp);
+                        AnimationUtil.startAlphaAnimation(ivAvatar);
+                    }
+                });
+                //加载封面图片资源
+                String coverUrl = user.getCover();
+                HttpUtil.getPictureAsync(coverUrl, getContext(), new Runnable() {
+                    @Override
+                    public void run() {
+                        Bitmap coverBmp = HttpUtil.getResponseBmp();
+                        ivCover.setImageBitmap(coverBmp);
+                        AnimationUtil.startAlphaAnimation(ivCover);
+                    }
+                });
             }
         });
     }
@@ -116,7 +148,7 @@ public class ProfileFragment extends Fragment {
     }
 
     @OnClick(R.id.cv_epq)
-    public void startEPQ(){
+    public void startEPQ() {
         Intent intent = new Intent(getContext(), EPQActivity.class);
         startActivity(intent);
     }
@@ -140,5 +172,6 @@ public class ProfileFragment extends Fragment {
         super.onResume();
         loadProfile();
     }
+
 
 }

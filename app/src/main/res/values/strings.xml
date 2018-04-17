@@ -13,7 +13,7 @@
     <string name="script">签名</string>
 
     <!--网络url-->
-    <string name="server_ip">10.236.196.112</string>
+    <string name="server_ip">192.168.1.104</string>
 
     <!-- Strings related to login -->
     <string name="prompt_email">请输入倾盖ID</string>
@@ -40,6 +40,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_edit_profile">修改个人资料</string>
+    <string name="title_activity_user_detail">详细资料</string>
     <string name="title_activity_epq">EPQ测试</string>
     <string name="title_activity_constellation">选择星座</string>
 

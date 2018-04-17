@@ -40,9 +40,9 @@ public class EPQActivity extends AppCompatActivity {
     TextView tvTestContent;
 
     @BindView(R.id.tv_e_score)
-    TextView tvNScore;
-    @BindView(R.id.tv_n_score)
     TextView tvEScore;
+    @BindView(R.id.tv_n_score)
+    TextView tvNScore;
     @BindView(R.id.tv_p_score)
     TextView tvPScore;
 
@@ -122,16 +122,17 @@ public class EPQActivity extends AppCompatActivity {
             tvTestNum.setText(testNum);
             tvTestContent.setText(EPQTest.EPQ[i]);
 
-        } else {
+        } else {//题答完了
             Log.i(TAG, "测试粗分:\nE"+eScore+"\nN"+nScore+"\nP"+pScore+"\nL"+lScore);
             eScore = EPQTest.NormConverse(EPQTest.E, eScore);
             nScore = EPQTest.NormConverse(EPQTest.N, eScore);
             pScore = EPQTest.NormConverse(EPQTest.P, eScore);
             lScore = EPQTest.NormConverse(EPQTest.L, eScore);
             Log.i(TAG, "常模转换结果:\nE"+eScore+"\nN"+nScore+"\nP"+pScore+"\nL"+lScore);
-            tvEScore.setText((int) eScore);
-            tvNScore.setText((int) nScore);
-            tvPScore.setText((int) pScore);
+
+            tvEScore.setText(String.valueOf((int) eScore));
+            tvNScore.setText(String.valueOf((int) nScore));
+            tvPScore.setText(String.valueOf((int) pScore));
             tvResultAnalyse.setText(EPQTest.resultAnalyse(eScore, nScore, pScore, lScore));
             commit(eScore, nScore, pScore, lScore);
         }

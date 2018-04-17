@@ -2,6 +2,8 @@
 <resources>
     <color name="main_color_dark">#17bfb4</color>
     <color name="main_color">#7ed8d2</color>
+    <color name="main_color_deep">#18C0B5</color>
+    <color name="main_color_light">#BCF1E1</color>
     <color name="background_color">#edf2f2</color>
     <color name="text_black">#4a4a4a</color>
     <color name="text_gray">#9b9b9b</color>

@@ -3,16 +3,18 @@ package com.mrbattery.encounter.entity;
 import java.io.Serializable;
 
 public class User implements Serializable {
-    private int userID;
-    private String userName;
-    private String password;
-    private int gender;
-    private int constellation;
-    private String script;
-    private double eScore;
-    private double nScore;
-    private double pScore;
-    private double lScore;
+    protected int userID;
+    protected String userName;
+    protected String password;
+    protected int gender;
+    protected int constellation;
+    protected String script;
+    protected double eScore;
+    protected double nScore;
+    protected double pScore;
+    protected double lScore;
+    protected String avatar;
+    protected String cover;
 
     public int getUserID() {
         return userID;
@@ -92,6 +94,22 @@ public class User implements Serializable {
 
     public void setlScore(double lScore) {
         this.lScore = lScore;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
+    public String getCover() {
+        return cover;
+    }
+
+    public void setCover(String cover) {
+        this.cover = cover;
     }
 
     @Override

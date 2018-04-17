@@ -69,12 +69,14 @@
                     android:layout_height="wrap_content">
 
                     <ImageView
+                        android:id="@+id/iv_cover"
                         android:layout_width="match_parent"
                         android:layout_height="180dp"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/default_cover" />
+                        android:background="@drawable/default_cover" />
 
                     <ImageView
+                        android:id="@+id/iv_edit_cover"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="bottom|right"
@@ -245,7 +247,7 @@
                     android:id="@+id/iv_avatar"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
-                    android:src="@drawable/default_avatar"
+                    android:background="@drawable/default_avatar"
                     app:riv_border_color="@android:color/white"
                     app:riv_border_width="2dp"
                     app:riv_oval="true" />

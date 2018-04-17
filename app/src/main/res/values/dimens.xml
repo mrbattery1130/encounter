@@ -6,4 +6,5 @@
     <dimen name="text_big">17sp</dimen>
     <dimen name="text_medium">15sp</dimen>
     <dimen name="text_small">13sp</dimen>
+    <dimen name="text_huge">40dp</dimen>
 </resources>

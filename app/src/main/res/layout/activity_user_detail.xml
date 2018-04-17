@@ -8,6 +8,40 @@
     android:orientation="vertical"
     tools:context=".UserDetailActivity">
 
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?android:attr/actionBarSize"
+        android:background="?android:attr/colorPrimary"
+        app:layout_collapseMode="pin"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginRight="16dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/iv_close"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginRight="8dp"
+                android:src="@drawable/back" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/title_activity_user_detail"
+                android:textColor="@color/text_white"
+                android:textSize="20sp" />
+
+
+        </LinearLayout>
+    </android.support.v7.widget.Toolbar>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -30,8 +64,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@color/main_color_dark"
-                    android:src="@drawable/default_cover"
-                    android:scaleType="centerCrop" />
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/default_cover" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -50,15 +84,19 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:gravity="center_vertical">
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
 
                             <com.makeramen.roundedimageview.RoundedImageView
-                                android:id="@+id/riv_avatar"
+                                android:id="@+id/iv_avatar"
                                 android:layout_width="48dp"
                                 android:layout_height="48dp"
-                                android:src="@drawable/default_avatar"
-                                app:riv_oval="true"/>
+                                android:elevation="2dp"
+                                android:scaleType="centerCrop"
+                                android:background="@drawable/default_avatar"
+                                app:riv_border_color="@android:color/white"
+                                app:riv_border_width="2dp"
+                                app:riv_oval="true" />
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -70,10 +108,14 @@
                                     android:id="@+id/tv_user_name"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
+                                    android:layout_marginBottom="8dp"
+                                    android:shadowColor="@color/overlay_dark"
+                                    android:shadowDx="0"
+                                    android:shadowDy="2"
+                                    android:shadowRadius="4"
                                     android:text="未设置昵称"
                                     android:textColor="@color/text_white"
-                                    android:textSize="@dimen/text_large"
-                                    android:layout_marginBottom="8dp"/>
+                                    android:textSize="@dimen/text_large" />
 
                                 <LinearLayout
                                     android:layout_width="match_parent"
@@ -84,6 +126,10 @@
                                         android:id="@+id/tv_gender"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
+                                        android:shadowColor="@color/overlay_dark"
+                                        android:shadowDx="0"
+                                        android:shadowDy="2"
+                                        android:shadowRadius="4"
                                         android:text="未知性别"
                                         android:textColor="@color/text_white"
                                         android:textSize="@dimen/text_small" />
@@ -93,6 +139,10 @@
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_marginLeft="8sp"
+                                        android:shadowColor="@color/overlay_dark"
+                                        android:shadowDx="0"
+                                        android:shadowDy="2"
+                                        android:shadowRadius="4"
                                         android:text="未知星座"
                                         android:textColor="@color/text_white"
                                         android:textSize="@dimen/text_small" />
@@ -104,11 +154,15 @@
                             android:id="@+id/tv_script"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:lineSpacingMultiplier="1.5"
+                            android:shadowColor="@color/overlay_dark"
+                            android:shadowDx="0"
+                            android:shadowDy="2"
+                            android:shadowRadius="4"
                             android:text="未设置签名"
                             android:textColor="@color/text_white"
-                            android:textSize="@dimen/text_small"
-                            android:lineSpacingMultiplier="1.5"
-                            android:layout_marginTop="8dp"/>
+                            android:textSize="@dimen/text_small" />
                     </LinearLayout>
 
                 </LinearLayout>
@@ -185,7 +239,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:lineSpacingMultiplier="1.5"
-                        android:text="运动：滑雪，游泳，慢跑\n电影：文艺片，动作片，纪录片\n饮食：可乐，比萨，红烧肉\n歌手：周杰伦，林俊杰，李荣浩"
+                        android:text="@string/error_no_keyword"
                         android:textColor="@color/text_black"
                         android:textSize="@dimen/text_big" />
                 </LinearLayout>
@@ -198,6 +252,7 @@
         android:layout_width="match_parent"
         android:layout_height="48sp"
         android:background="@color/main_color_dark"
+        android:foreground="?android:attr/selectableItemBackground"
         android:text="聊一聊"
         android:textColor="@color/text_white"
         android:textSize="@dimen/text_big" />
