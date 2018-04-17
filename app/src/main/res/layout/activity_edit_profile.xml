@@ -72,8 +72,8 @@
                         android:id="@+id/iv_cover"
                         android:layout_width="match_parent"
                         android:layout_height="180dp"
-                        android:scaleType="centerCrop"
-                        android:background="@drawable/default_cover" />
+                        android:background="@drawable/default_cover"
+                        android:scaleType="centerCrop" />
 
                     <ImageView
                         android:id="@+id/iv_edit_cover"
@@ -111,8 +111,8 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:focusable="false"
                             android:clickable="false"
+                            android:focusable="false"
                             android:longClickable="false"
                             android:text="1000"
                             android:textColor="@color/text_gray"
@@ -204,8 +204,8 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:focusable="false"
-                            android:text="未知星座"
                             android:longClickable="false"
+                            android:text="未知星座"
                             android:textColor="@color/text_black"
                             android:textSize="@dimen/text_big" />
                     </LinearLayout>
@@ -229,10 +229,10 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
+                            android:lineSpacingMultiplier="1.2"
                             android:text=""
                             android:textColor="@color/text_black"
-                            android:textSize="@dimen/text_big"
-                            android:lineSpacingMultiplier="1.2"/>
+                            android:textSize="@dimen/text_big" />
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
@@ -248,14 +248,16 @@
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:background="@drawable/default_avatar"
+                    android:scaleType="centerCrop"
                     app:riv_border_color="@android:color/white"
                     app:riv_border_width="2dp"
                     app:riv_oval="true" />
+
                 <ImageView
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_gravity="right|bottom"
-                    android:src="@drawable/edit_profile_photo"/>
+                    android:src="@drawable/edit_profile_photo" />
             </FrameLayout>
         </FrameLayout>
     </ScrollView>

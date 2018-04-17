@@ -1,5 +1,6 @@
 package com.mrbattery.encounter.fragment;
 
+import android.content.ContentValues;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -22,7 +23,6 @@ import com.mrbattery.encounter.UserDetailActivity;
 import com.mrbattery.encounter.recyclerView.EncounterAdapter;
 import com.mrbattery.encounter.constant.Constant;
 import com.mrbattery.encounter.entity.MatchedUser;
-import com.mrbattery.encounter.recyclerView.EncounterRecyclerView;
 import com.mrbattery.encounter.util.HttpUtil;
 
 import java.util.ArrayList;
@@ -31,8 +31,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
+import static android.content.ContentValues.TAG;
 import static android.widget.LinearLayout.VERTICAL;
-import static com.makeramen.roundedimageview.RoundedDrawable.TAG;
 
 public class EncounterFragment extends Fragment {
 
@@ -83,6 +83,9 @@ public class EncounterFragment extends Fragment {
             @Override
             public void run() {
                 ArrayList<MatchedUser> matchedUsers = HttpUtil.parseJSONListWithGSON();
+                for (MatchedUser matchedUser : matchedUsers) {
+                    Log.i(TAG, "\nrun: " + matchedUser.toString());
+                }
                 //初始化adapter
                 adapter = new EncounterAdapter(matchedUsers, getContext());
                 //设置点击事件

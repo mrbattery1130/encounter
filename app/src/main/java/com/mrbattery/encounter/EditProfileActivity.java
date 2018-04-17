@@ -8,12 +8,15 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
+import com.makeramen.roundedimageview.RoundedImageView;
 import com.mrbattery.encounter.constant.Constant;
 import com.mrbattery.encounter.entity.User;
 import com.mrbattery.encounter.util.HttpUtil;
+import com.squareup.picasso.Picasso;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
@@ -38,6 +41,11 @@ public class EditProfileActivity extends AppCompatActivity {
     RadioButton rbMale;
     @BindView(R.id.rb_female)
     RadioButton rbFemale;
+    @BindView(R.id.iv_avatar)
+    RoundedImageView ivAvatar;
+    @BindView(R.id.iv_cover)
+    ImageView ivCover;
+
     @BindView(R.id.toolbar)
     Toolbar toolbar;
 
@@ -62,6 +70,8 @@ public class EditProfileActivity extends AppCompatActivity {
         tvUserName.setText(user.getUserName());
         tvConstellation.setText(Constant.getConstellationName(user.getConstellation()));
         tvScript.setText(user.getScript());
+        Picasso.get().load(user.getAvatar()).into(ivAvatar);
+        Picasso.get().load(user.getCover()).into(ivCover);
         switch (user.getGender()) {
             case 1:
                 rbMale.setChecked(true);

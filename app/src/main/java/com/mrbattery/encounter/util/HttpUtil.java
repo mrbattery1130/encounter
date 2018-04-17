@@ -160,16 +160,7 @@ public class HttpUtil {
             }.getType());
 
             //控制台输出结果，便于查看
-            Log.d(TAG, "user_id: " + u.getUserID());
-            Log.d(TAG, "user_name: " + u.getUserName());
-            Log.d(TAG, "user_gender: " + u.getGender());
-            Log.d(TAG, "constellation: " + u.getConstellation());
-            Log.d(TAG, "script: " + u.getScript());
-
-            Log.d(TAG, "eScore: " + u.geteScore());
-            Log.d(TAG, "nScore: " + u.getnScore());
-            Log.d(TAG, "pScore: " + u.getpScore());
-            Log.d(TAG, "lScore: " + u.getlScore());
+            Log.i(TAG, "parseJSONWithGSON: " + u.toString());
 
             return u;
         }
@@ -183,6 +174,9 @@ public class HttpUtil {
         } else {
             ArrayList<MatchedUser> matchedUsers = gson.fromJson(responseData, new TypeToken<ArrayList<MatchedUser>>() {
             }.getType());
+            for (MatchedUser matchedUser : matchedUsers) {
+                Log.i(TAG, "parseJSONListWithGSON: " + matchedUser.toString());
+            }
             return matchedUsers;
         }
     }

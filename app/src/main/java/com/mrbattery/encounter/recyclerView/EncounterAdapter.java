@@ -14,7 +14,9 @@ import android.widget.TextView;
 import com.mrbattery.encounter.R;
 import com.mrbattery.encounter.constant.Constant;
 import com.mrbattery.encounter.entity.MatchedUser;
+import com.mrbattery.encounter.util.AnimationUtil;
 import com.mrbattery.encounter.util.HttpUtil;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.concurrent.CountDownLatch;
@@ -29,22 +31,10 @@ public class EncounterAdapter extends EncounterRecyclerView.Adapter<EncounterAda
     private ViewHolder viewHolder;
     private OnItemClickListener mOnItemClickListener;
     private boolean scrolling;
-    int[] avatarTag;
-    int[] coverTag;
 
     public EncounterAdapter(ArrayList<MatchedUser> mData, Context context) {
         this.mData = mData;
         this.context = context;
-        avatarTag = new int[mData.size()];
-        for (int i = 0; i < avatarTag.length; i++) {
-            avatarTag[i] = 2 * i;
-            Log.i(TAG, "EncounterAdapter: 初始化avatarTag:" + avatarTag[i]);
-        }
-        coverTag = new int[mData.size()];
-        for (int i = 0; i < coverTag.length; i++) {
-            coverTag[i] = 2 * i + 1;
-            Log.i(TAG, "EncounterAdapter: 初始化coverTag:" + coverTag[i]);
-        }
     }
 
     public void updateData(ArrayList<MatchedUser> data) {
@@ -81,57 +71,46 @@ public class EncounterAdapter extends EncounterRecyclerView.Adapter<EncounterAda
         holder.ivGender.setImageResource(Constant.getGenderSrc(matchedUser.getGender()));
 
         //加载头像图片资源
-        //给ImageView打上Tag作为特有标记
-        holder.ivAvatar.setTag(avatarTag[position]);
-        final int tempAvatarTag = avatarTag[position];
 
         String avatarUrl = matchedUser.getAvatar();
         Log.i(TAG, "run: 开始加载头像" + position);
-        HttpUtil.getPictureAsync(avatarUrl, context, new Runnable() {
+        Picasso.get().load(avatarUrl).into(holder.ivAvatar);
+        /*HttpUtil.getPictureAsync(avatarUrl, context, new Runnable() {
             @Override
             public void run() {
                 Bitmap avatarBmp = HttpUtil.getResponseBmp();
-                if (tempAvatarTag == (int) holder.ivAvatar.getTag()) {
                     holder.ivAvatar.setImageBitmap(avatarBmp);
+                    AnimationUtil.startAlphaAnimation(holder.ivAvatar);
                     Log.i(TAG, "run: 完成加载头像" + position);
-                } else {
-                    Log.i(TAG, "run: TAG不正确，拒绝加载头像" + position);
-                }
             }
-        });
+        });*/
 
         //加载封面图片资源
-        //给ImageView打上Tag作为特有标记
-        holder.ivCover.setTag(coverTag[position]);
-        final int tempCoverTag = coverTag[position];
-
         String coverUrl = matchedUser.getCover();
         Log.i(TAG, "run: 开始加载封面" + position);
-        HttpUtil.getPictureAsync(coverUrl, context, new Runnable() {
+        Picasso.get().load(coverUrl).into(holder.ivCover);
+        /*HttpUtil.getPictureAsync(coverUrl, context, new Runnable() {
             @Override
             public void run() {
                 Bitmap coverBmp = HttpUtil.getResponseBmp();
-                if (tempCoverTag == (int) holder.ivCover.getTag()) {
                     holder.ivCover.setImageBitmap(coverBmp);
+                    AnimationUtil.startAlphaAnimation(holder.ivCover);
                     Log.i(TAG, "run: 完成加载封面" + position);
-                } else {
-                    Log.i(TAG, "run: TAG不正确，拒绝加载封面" + position);
-                }
             }
-        });
+        });*/
 
         //填充onCreateViewHolder方法返回的holder中的控件
         if (mOnItemClickListener != null) {
             ViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    mOnItemClickListener.onClick(position);
+                    mOnItemClickListener.onClick(holder.getLayoutPosition());
                 }
             });
             ViewHolder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View v) {
-                    mOnItemClickListener.onLongClick(position);
+                    mOnItemClickListener.onLongClick(holder.getLayoutPosition());
                     return false;
                 }
             });

@@ -9,10 +9,12 @@ import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.makeramen.roundedimageview.RoundedImageView;
 import com.mrbattery.encounter.constant.Constant;
 import com.mrbattery.encounter.entity.User;
 import com.mrbattery.encounter.util.AnimationUtil;
 import com.mrbattery.encounter.util.HttpUtil;
+import com.squareup.picasso.Picasso;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -36,7 +38,7 @@ public class UserDetailActivity extends AppCompatActivity {
     TextView tvScript;
 
     @BindView(R.id.iv_avatar)
-    ImageView ivAvatar;
+    RoundedImageView ivAvatar;
     @BindView(R.id.iv_cover)
     ImageView ivCover;
 
@@ -72,24 +74,26 @@ public class UserDetailActivity extends AppCompatActivity {
                 tvGender.setText(Constant.getGender(user.getGender()));
                 //加载头像图片资源
                 String avatarUrl = user.getAvatar();
-                HttpUtil.getPictureAsync(avatarUrl, context, new Runnable() {
+                Picasso.get().load(avatarUrl).into(ivAvatar);
+                /*HttpUtil.getPictureAsync(avatarUrl, context, new Runnable() {
                     @Override
                     public void run() {
                         Bitmap avatarBmp = HttpUtil.getResponseBmp();
                         ivAvatar.setImageBitmap(avatarBmp);
                         AnimationUtil.startAlphaAnimation(ivAvatar);
                     }
-                });
+                });*/
                 //加载封面图片资源
                 String coverUrl = user.getCover();
-                HttpUtil.getPictureAsync(coverUrl, context, new Runnable() {
+                Picasso.get().load(coverUrl).into(ivCover);
+                /*HttpUtil.getPictureAsync(coverUrl, context, new Runnable() {
                     @Override
                     public void run() {
                         Bitmap coverBmp = HttpUtil.getResponseBmp();
                         ivCover.setImageBitmap(coverBmp);
                         AnimationUtil.startAlphaAnimation(ivCover);
                     }
-                });
+                });*/
             }
         });
 
