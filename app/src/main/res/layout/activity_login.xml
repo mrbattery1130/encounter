@@ -19,12 +19,12 @@
             android:id="@+id/email_login_form"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:orientation="vertical">
 
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="40dp"
                 android:src="@drawable/logo" />
 
             <LinearLayout
@@ -91,7 +91,7 @@
                 android:paddingLeft="16dp"
                 android:text="@string/action_forget_password"
                 android:textColor="@color/text_gray"
-                android:textSize="@dimen/text_medium"/>
+                android:textSize="@dimen/text_medium" />
 
             <Button
                 android:id="@+id/sign_in_button"
@@ -123,7 +123,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/overlay_dark"
-        android:visibility="gone"/>
+        android:visibility="gone" />
     <!-- Login progress -->
     <ProgressBar
         android:id="@+id/login_progress"
@@ -132,5 +132,5 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginBottom="8dp"
-        android:visibility="gone"/>
+        android:visibility="gone" />
 </FrameLayout>

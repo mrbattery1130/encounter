@@ -2,16 +2,20 @@ package com.mrbattery.encounter;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.RadioButton;
 
 import com.mrbattery.encounter.constant.Constant;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class ChooseConstellationActivity extends AppCompatActivity {
 
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
     private int constellationSelected = 0;
 
     @Override

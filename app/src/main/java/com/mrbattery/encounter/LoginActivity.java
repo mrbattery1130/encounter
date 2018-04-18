@@ -2,7 +2,9 @@ package com.mrbattery.encounter;
 
 import android.app.Activity;
 
+import android.content.ContentValues;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -12,14 +14,28 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.mrbattery.encounter.constant.Constant;
+import com.mrbattery.encounter.entity.UserToken;
 import com.mrbattery.encounter.util.HttpUtil;
+
+import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import io.rong.imkit.RongIM;
+import io.rong.imlib.RongIMClient;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
-import static com.makeramen.roundedimageview.RoundedDrawable.TAG;
+import static android.content.ContentValues.TAG;
+
 
 public class LoginActivity extends Activity {
 
@@ -43,6 +59,7 @@ public class LoginActivity extends Activity {
 
     //全局变量
     private String userID;
+    private UserToken userToken;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,8 +100,7 @@ public class LoginActivity extends Activity {
                 if (responseData.equals("success")) {
                     Log.i(TAG, "run: login successful!!!");
                     Constant.setCurrUserID(userID);
-                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                    startActivity(intent);
+                    getToken(userID);
                 } else if (responseData.equals("invalid_user_id")) {
                     Toast.makeText(LoginActivity.this, "用户不存在", Toast.LENGTH_SHORT).show();
                 } else if (responseData.equals("incorrect_password")) {
@@ -99,6 +115,61 @@ public class LoginActivity extends Activity {
 
         });
 
+    }
+
+    private void getToken(final String userID) {
+        String url = "http://" + this.getString(R.string.server_ip) + ":8080/getToken?userID=" + userID;
+        Log.i(TAG, "postId: 开始请求token");
+        HttpUtil.getDataAsync(url, this, new Runnable() {
+            @Override
+            public void run() {
+                final String responseData = HttpUtil.getResponseData();
+                Log.i(TAG, "onResponse: 返回token：" + responseData);
+                Gson gson = new Gson();
+                userToken = gson.fromJson(responseData, new TypeToken<UserToken>() {
+                }.getType());
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Log.i(TAG, "responseData" + responseData + ", token:" + userToken.getToken());
+//                        Toast.makeText(LoginActivity.this, "responseData" + responseData + ", token:" + userToken.getToken(), Toast.LENGTH_SHORT).show();
+                        Constant.setCurrToken(userToken.getToken());
+                        connectRongCloud();
+                    }
+                });
+
+            }
+        });
+    }
+
+    private void connectRongCloud() {
+        Log.i(TAG, "connectRongCloud: 连接服务器");
+        if (getApplicationInfo().packageName.equals(App.getCurProcessName(getApplicationContext()))) {
+            RongIM.connect(userToken.getToken(), new RongIMClient.ConnectCallback() {
+                @Override
+                public void onTokenIncorrect() {
+                }
+
+                @Override
+                public void onSuccess(String userID) {
+                    //userID，是我们在申请token时填入的userID
+                    System.out.println("========userID" + userID);
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Log.i(TAG, "connectRongCloud: 连接服务器成功");
+                            Constant.setCurrToken(userToken.getToken());
+                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                            startActivity(intent);
+                        }
+                    });
+                }
+
+                @Override
+                public void onError(RongIMClient.ErrorCode errorCode) {
+                }
+            });
+        }
     }
 
     @OnClick(R.id.sign_up_button)

@@ -21,7 +21,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-    //fragmet嵌入在这里
+    //fragment嵌入在这里
     @BindView(R.id.id_main_container)
     public FrameLayout mainFrameLayout;
     //Fragment管理

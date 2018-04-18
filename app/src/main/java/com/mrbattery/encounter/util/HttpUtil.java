@@ -85,7 +85,7 @@ public class HttpUtil {
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
-                    responseData = "ERROR";
+                    responseData = "network_error";
                 }
             }
         }).start();

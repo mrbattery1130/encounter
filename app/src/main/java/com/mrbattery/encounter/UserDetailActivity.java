@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -18,6 +19,9 @@ import com.squareup.picasso.Picasso;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
+import io.rong.imkit.RongIM;
+import io.rong.imlib.model.Conversation;
 
 import static com.makeramen.roundedimageview.RoundedDrawable.TAG;
 
@@ -96,7 +100,10 @@ public class UserDetailActivity extends AppCompatActivity {
                 });*/
             }
         });
+    }
 
-
+    @OnClick(R.id.btn_chat)
+    public void chat() {
+        RongIM.getInstance().startConversation(this, Conversation.ConversationType.PRIVATE, String.valueOf(user.getUserID()), user.getUserName());
     }
 }

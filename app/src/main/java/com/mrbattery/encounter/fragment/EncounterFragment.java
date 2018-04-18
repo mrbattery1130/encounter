@@ -1,12 +1,12 @@
 package com.mrbattery.encounter.fragment;
 
-import android.content.ContentValues;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -20,7 +20,7 @@ import android.widget.Toast;
 
 import com.mrbattery.encounter.R;
 import com.mrbattery.encounter.UserDetailActivity;
-import com.mrbattery.encounter.recyclerView.EncounterAdapter;
+import com.mrbattery.encounter.adapter.EncounterAdapter;
 import com.mrbattery.encounter.constant.Constant;
 import com.mrbattery.encounter.entity.MatchedUser;
 import com.mrbattery.encounter.util.HttpUtil;
@@ -63,7 +63,7 @@ public class EncounterFragment extends Fragment {
         unbinder = ButterKnife.bind(this, view);
 
         //toolbar代替actionbar
-//        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
+        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
         toolbar.inflateMenu(R.menu.menu_parent_fragment);
         setHasOptionsMenu(true);
 
@@ -135,8 +135,7 @@ public class EncounterFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         //设置 进度条的颜色变化，最多可以设置4种颜色
-        swipeRefreshWidget.setColorScheme(R.color.main_color_deep, R.color.main_color_dark,
-                R.color.main_color, R.color.main_color_light);
+        swipeRefreshWidget.setColorScheme(R.color.main_color);
         swipeRefreshWidget.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {

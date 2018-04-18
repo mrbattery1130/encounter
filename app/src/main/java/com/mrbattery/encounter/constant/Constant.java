@@ -7,6 +7,8 @@ public class Constant {
     private static int currUserID;
     //当前用户星座
     private static int currConstellation;
+    //当前用户Token
+    private static String currToken;
 
     //十二星座
     public static final String unknownConstellation = "未知星座";
@@ -152,6 +154,14 @@ public class Constant {
 
     public static void setCurrConstellation(int currConstellation) {
         Constant.currConstellation = currConstellation;
+    }
+
+    public static String getCurrToken() {
+        return currToken;
+    }
+
+    public static void setCurrToken(String currToken) {
+        Constant.currToken = currToken;
     }
 
     //String类型的userID的set方法
