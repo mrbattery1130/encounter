@@ -12,9 +12,6 @@
     <string name="constellation">星座</string>
     <string name="script">签名</string>
 
-    <!--网络url-->
-    <string name="server_ip">192.168.1.104</string>
-
     <!-- Strings related to login -->
     <string name="prompt_email">请输入倾盖ID</string>
     <string name="prompt_password">请输入密码</string>
@@ -34,15 +31,16 @@
     <string name="error_mismatching_password">两次密码不一致</string>
     <string name="error_field_required">输入不能为空，请检查</string>
     <string name="error_no_test_record">没有测试记录！点击开始测试</string>
-    <string name="error_no_keyword">没有选择话题标签！点击开始选择</string>
+    <string name="error_no_keyword">没有设置话题标签！</string>
     <string name="permission_rationale">"Contacts permissions are needed for providing email completions."</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="title_activity_edit_profile">修改个人资料</string>
+    <string name="title_activity_edit_profile">编辑个人资料</string>
     <string name="title_activity_user_detail">详细资料</string>
     <string name="title_activity_epq">EPQ测试</string>
     <string name="title_activity_constellation">选择星座</string>
+    <string name="title_activity_edit_keyword">编辑话题标签</string>
 
     <string name="epq_introduction">艾森克人格问卷(简称EPQ)是英国伦敦大学心理系和精神病研究所艾森克教授编制的, 他搜集了大量数据，通过因素分析归纳提出决定人格的三个基本因素: 内外向性(E)、情绪性(N)和精神质(P), 人们在这三方面的不同倾向和不同表现程度, 便构成了不同的人格特征。</string>
 

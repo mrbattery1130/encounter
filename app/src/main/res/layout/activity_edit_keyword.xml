@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".EditKeywordActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?android:attr/actionBarSize"
+        android:background="@color/main_color"
+        app:layout_collapseMode="pin"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginRight="16dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/iv_close"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginRight="8dp"
+                android:src="@drawable/close" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/title_activity_edit_keyword"
+                android:textColor="@color/text_white"
+                android:textSize="20sp" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <ImageView
+                android:id="@+id/iv_okay"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:src="@drawable/okay" />
+        </LinearLayout>
+    </android.support.v7.widget.Toolbar>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:visibility="gone">
+
+                <RadioButton
+                    android:id="@+id/rb01"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:text="@string/constellation01"
+                    android:textColor="@color/text_black"
+                    android:textSize="@dimen/text_big" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:background="@color/main_color_dark" />
+
+                <RadioButton
+                    android:id="@+id/rb02"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:text="@string/constellation02"
+                    android:textColor="@color/text_black"
+                    android:textSize="@dimen/text_big" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:background="@color/main_color_dark" />
+
+                <RadioButton
+                    android:id="@+id/rb03"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:text="@string/constellation03"
+                    android:textColor="@color/text_black"
+                    android:textSize="@dimen/text_big" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:background="@color/main_color_dark" />
+
+                <RadioButton
+                    android:id="@+id/rb04"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:text="@string/constellation04"
+                    android:textColor="@color/text_black"
+                    android:textSize="@dimen/text_big" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:background="@color/main_color_dark" />
+
+                <RadioButton
+                    android:id="@+id/rb05"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:text="@string/constellation05"
+                    android:textColor="@color/text_black"
+                    android:textSize="@dimen/text_big" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:background="@color/main_color_dark" />
+
+                <RadioButton
+                    android:id="@+id/rb06"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:text="@string/constellation06"
+                    android:textColor="@color/text_black"
+                    android:textSize="@dimen/text_big" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:background="@color/main_color_dark" />
+
+                <RadioButton
+                    android:id="@+id/rb07"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:text="@string/constellation07"
+                    android:textColor="@color/text_black"
+                    android:textSize="@dimen/text_big" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:background="@color/main_color_dark" />
+
+                <RadioButton
+                    android:id="@+id/rb08"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:text="@string/constellation08"
+                    android:textColor="@color/text_black"
+                    android:textSize="@dimen/text_big" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:background="@color/main_color_dark" />
+
+                <RadioButton
+                    android:id="@+id/rb09"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:text="@string/constellation09"
+                    android:textColor="@color/text_black"
+                    android:textSize="@dimen/text_big" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:background="@color/main_color_dark" />
+
+                <RadioButton
+                    android:id="@+id/rb10"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:text="@string/constellation10"
+                    android:textColor="@color/text_black"
+                    android:textSize="@dimen/text_big" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:background="@color/main_color_dark" />
+
+                <RadioButton
+                    android:id="@+id/rb11"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:text="@string/constellation11"
+                    android:textColor="@color/text_black"
+                    android:textSize="@dimen/text_big" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:background="@color/main_color_dark" />
+
+                <RadioButton
+                    android:id="@+id/rb12"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:text="@string/constellation12"
+                    android:textColor="@color/text_black"
+                    android:textSize="@dimen/text_big" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:background="@color/main_color_dark" />
+
+                <RadioButton
+                    android:id="@+id/rb00"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:text="@string/constellation00"
+                    android:textColor="@color/text_black"
+                    android:textSize="@dimen/text_big" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:background="@color/main_color_dark" />
+
+            </RadioGroup>
+
+            <TextView
+                android:id="@+id/tv_keywords"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="话题标签"
+                android:textColor="@color/text_black"
+                android:textSize="@dimen/text_big"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:lineSpacingMultiplier="1.5"/>
+        </LinearLayout>
+
+    </ScrollView>
+
+
+</LinearLayout>

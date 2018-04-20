@@ -26,6 +26,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 import static com.makeramen.roundedimageview.RoundedDrawable.TAG;
+import static com.mrbattery.encounter.constant.Constant.getSERVER_IP;
 
 public class EditProfileActivity extends AppCompatActivity {
 
@@ -102,19 +103,18 @@ public class EditProfileActivity extends AppCompatActivity {
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
-        String url = "http://" + this.getString(R.string.server_ip) + ":8080/post_profile?" +
+        String url = "http://" + getSERVER_IP() + ":8080/post_profile?" +
                 "userID=" + tvUserID.getText()
                 + "&userName=" + userName
                 + "&gender=" + gender
                 + "&constellation=" + Constant.getCurrConstellation()
                 + "&script=" + script;
         Log.i(TAG, url);
-
         HttpUtil.getDataAsync(url, this, new Runnable() {
             @Override
             public void run() {
                 String responseData = HttpUtil.getResponseData();
-                Log.d(TAG, "responseData: " + responseData);
+                        Log.d(TAG, "responseData: " + responseData);
                 switch (responseData) {
                     case "success":
                         Toast.makeText(EditProfileActivity.this, "修改成功", Toast.LENGTH_SHORT).show();
@@ -129,7 +129,6 @@ public class EditProfileActivity extends AppCompatActivity {
                 }
             }
         });
-
 
     }
 

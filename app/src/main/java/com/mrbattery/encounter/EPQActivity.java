@@ -21,6 +21,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 import static com.makeramen.roundedimageview.RoundedDrawable.TAG;
+import static com.mrbattery.encounter.constant.Constant.getSERVER_IP;
 
 public class EPQActivity extends AppCompatActivity {
 
@@ -54,8 +55,6 @@ public class EPQActivity extends AppCompatActivity {
     double nScore = 0;
     double pScore = 0;
     double lScore = 0;
-
-    String responseData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -123,12 +122,12 @@ public class EPQActivity extends AppCompatActivity {
             tvTestContent.setText(EPQTest.EPQ[i]);
 
         } else {//题答完了
-            Log.i(TAG, "测试粗分:\nE"+eScore+"\nN"+nScore+"\nP"+pScore+"\nL"+lScore);
+            Log.i(TAG, "测试粗分:\nE" + eScore + "\nN" + nScore + "\nP" + pScore + "\nL" + lScore);
             eScore = EPQTest.NormConverse(EPQTest.E, eScore);
             nScore = EPQTest.NormConverse(EPQTest.N, eScore);
             pScore = EPQTest.NormConverse(EPQTest.P, eScore);
             lScore = EPQTest.NormConverse(EPQTest.L, eScore);
-            Log.i(TAG, "常模转换结果:\nE"+eScore+"\nN"+nScore+"\nP"+pScore+"\nL"+lScore);
+            Log.i(TAG, "常模转换结果:\nE" + eScore + "\nN" + nScore + "\nP" + pScore + "\nL" + lScore);
 
             tvEScore.setText(String.valueOf((int) eScore));
             tvNScore.setText(String.valueOf((int) nScore));
@@ -144,7 +143,7 @@ public class EPQActivity extends AppCompatActivity {
     }
 
     private void commit(final double eScore, final double nScore, double pScore, double lScore) {
-        String url = "http://" + this.getString(R.string.server_ip) + ":8080/post_epq_score?" +
+        String url = "http://" + getSERVER_IP() + ":8080/post_epq_score?" +
                 "userID=" + Constant.getCurrUserID()
                 + "&eScore=" + eScore
                 + "&nScore=" + nScore
@@ -154,16 +153,18 @@ public class EPQActivity extends AppCompatActivity {
         HttpUtil.getDataAsync(url, this, new Runnable() {
             @Override
             public void run() {
-                responseData = HttpUtil.getResponseData();
+                String responseData = HttpUtil.getResponseData();
                 if (responseData.equals("success")) {
                     switchEPQView(R.id.ll_epq_result);
                     Log.i(TAG, "run: post successfully!!!");
                 } else {
                     Toast.makeText(EPQActivity.this, "测试结果上传失败", Toast.LENGTH_SHORT).show();
                 }
-
             }
         });
+
+
+
     }
 
     private void switchEPQView(int llId) {

@@ -113,7 +113,7 @@ public class ConversationActivity extends FragmentActivity implements View.OnCli
 
         Log.e(TAG, "mConversationType: " + mConversationType + ", title: " + title + ", mTargetId" + mTargetId);
 
-        Toast.makeText(this, "mConversationType: " + mConversationType + ", title: " + title + ", mTargetId: " + mTargetId, Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, "mConversationType: " + mConversationType + ", title: " + title + ", mTargetId: " + mTargetId, Toast.LENGTH_SHORT).show();
         setActionBarTitle(mConversationType, mTargetId);
 
         if (mConversationType.equals(Conversation.ConversationType.PRIVATE) | mConversationType.equals(Conversation.ConversationType.PUBLIC_SERVICE) | mConversationType.equals(Conversation.ConversationType.DISCUSSION)) {
@@ -271,7 +271,7 @@ public class ConversationActivity extends FragmentActivity implements View.OnCli
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.iv_user:
+            /*case R.id.iv_user:
                 if (mConversationType == Conversation.ConversationType.PUBLIC_SERVICE
                         || mConversationType == Conversation.ConversationType.APP_PUBLIC_SERVICE) {
 
@@ -292,7 +292,7 @@ public class ConversationActivity extends FragmentActivity implements View.OnCli
                     }
 
                 }
-                break;
+                break;*/
 
             case R.id.iv_back:
                 finish();

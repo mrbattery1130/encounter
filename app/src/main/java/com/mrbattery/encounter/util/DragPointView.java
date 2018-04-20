@@ -27,11 +27,13 @@ import android.view.animation.OvershootInterpolator;
 import android.widget.AbsListView;
 import android.widget.ScrollView;
 
+import static io.rong.imageloader.core.ImageLoader.TAG;
+
 
 public class DragPointView extends android.support.v7.widget.AppCompatTextView {
     private boolean initBgFlag;
     private OnDragListener dragListener;
-    private int backgroundColor = Color.parseColor("#17bfb4");
+    private int backgroundColor = Color.parseColor("#7ed8d2");
     private PointView pointView;
     private int x, y, r;
     private ViewGroup scrollParent;
@@ -46,7 +48,7 @@ public class DragPointView extends android.support.v7.widget.AppCompatTextView {
         return dragListener;
     }
 
-    public void setDragListencer(OnDragListener dragListener) {
+    public void setDragListener(OnDragListener dragListener) {
         this.dragListener = dragListener;
     }
 
@@ -127,10 +129,13 @@ public class DragPointView extends android.support.v7.widget.AppCompatTextView {
                     scrollParent.requestDisallowInterceptTouchEvent(false);
                 }
                 if (!pointView.broken) { // 没有拉断
+                    Log.i(TAG, "onTouchEvent: 没有拉断!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
                     pointView.cancel();
                 } else if (pointView.nearby) {// 拉断了,但是又回去了
+                    Log.i(TAG, "onTouchEvent: 拉断了,但是又回去了!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
                     pointView.cancel();
                 } else { // 彻底拉断了
+                    Log.i(TAG, "onTouchEvent: 彻底拉断了!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
                     pointView.broken();
                 }
                 break;
@@ -307,6 +312,7 @@ public class DragPointView extends android.support.v7.widget.AppCompatTextView {
             });
             a.start();
             if (dragListener != null) {
+                Log.i(TAG, "broken: 开始监听onDragOut！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！");
                 dragListener.onDragOut();
             }
         }

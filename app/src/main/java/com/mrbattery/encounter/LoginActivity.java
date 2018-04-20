@@ -2,9 +2,7 @@ package com.mrbattery.encounter;
 
 import android.app.Activity;
 
-import android.content.ContentValues;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -20,21 +18,14 @@ import com.mrbattery.encounter.constant.Constant;
 import com.mrbattery.encounter.entity.UserToken;
 import com.mrbattery.encounter.util.HttpUtil;
 
-import java.io.IOException;
-import java.util.concurrent.TimeUnit;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import io.rong.imkit.RongIM;
 import io.rong.imlib.RongIMClient;
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
 
 import static android.content.ContentValues.TAG;
+import static com.mrbattery.encounter.constant.Constant.getSERVER_IP;
 
 
 public class LoginActivity extends Activity {
@@ -78,21 +69,19 @@ public class LoginActivity extends Activity {
 
         userID = tvUserID.getText().toString();
         String password = tvPassword.getText().toString();
-        String url = "http://" + this.getString(R.string.server_ip) + ":8080/login?userID=" + userID + "&password=" + password;
+        String url = "http://" + getSERVER_IP() + ":8080/login?userID=" + userID + "&password=" + password;
         //显示加载进度条和遮罩
         loginProgress.setVisibility(View.VISIBLE);
         loginOverlay.setVisibility(View.VISIBLE);
         loginOverlay.setClickable(true);
 //        Toast.makeText(this, "点击了登录按钮！！！！", Toast.LENGTH_SHORT).show();
         Log.i(TAG, url);
-
-        //异步请求+回调
         Log.i(TAG, "signIn: 开始请求数据");
         HttpUtil.getDataAsync(url, this, new Runnable() {
             @Override
             public void run() {
                 String responseData = HttpUtil.getResponseData();
-                Log.i(TAG, "run: " + responseData);
+                Log.i(TAG, "run: responseData: " + responseData);
                 //隐藏加载进度条和遮罩
                 loginProgress.setVisibility(View.INVISIBLE);
                 loginOverlay.setVisibility(View.INVISIBLE);
@@ -101,6 +90,8 @@ public class LoginActivity extends Activity {
                     Log.i(TAG, "run: login successful!!!");
                     Constant.setCurrUserID(userID);
                     getToken(userID);
+                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                    startActivity(intent);
                 } else if (responseData.equals("invalid_user_id")) {
                     Toast.makeText(LoginActivity.this, "用户不存在", Toast.LENGTH_SHORT).show();
                 } else if (responseData.equals("incorrect_password")) {
@@ -112,65 +103,11 @@ public class LoginActivity extends Activity {
                     Toast.makeText(LoginActivity.this, "登录失败", Toast.LENGTH_SHORT).show();
                 }
             }
-
         });
 
+
     }
 
-    private void getToken(final String userID) {
-        String url = "http://" + this.getString(R.string.server_ip) + ":8080/getToken?userID=" + userID;
-        Log.i(TAG, "postId: 开始请求token");
-        HttpUtil.getDataAsync(url, this, new Runnable() {
-            @Override
-            public void run() {
-                final String responseData = HttpUtil.getResponseData();
-                Log.i(TAG, "onResponse: 返回token：" + responseData);
-                Gson gson = new Gson();
-                userToken = gson.fromJson(responseData, new TypeToken<UserToken>() {
-                }.getType());
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Log.i(TAG, "responseData" + responseData + ", token:" + userToken.getToken());
-//                        Toast.makeText(LoginActivity.this, "responseData" + responseData + ", token:" + userToken.getToken(), Toast.LENGTH_SHORT).show();
-                        Constant.setCurrToken(userToken.getToken());
-                        connectRongCloud();
-                    }
-                });
-
-            }
-        });
-    }
-
-    private void connectRongCloud() {
-        Log.i(TAG, "connectRongCloud: 连接服务器");
-        if (getApplicationInfo().packageName.equals(App.getCurProcessName(getApplicationContext()))) {
-            RongIM.connect(userToken.getToken(), new RongIMClient.ConnectCallback() {
-                @Override
-                public void onTokenIncorrect() {
-                }
-
-                @Override
-                public void onSuccess(String userID) {
-                    //userID，是我们在申请token时填入的userID
-                    System.out.println("========userID" + userID);
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            Log.i(TAG, "connectRongCloud: 连接服务器成功");
-                            Constant.setCurrToken(userToken.getToken());
-                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                            startActivity(intent);
-                        }
-                    });
-                }
-
-                @Override
-                public void onError(RongIMClient.ErrorCode errorCode) {
-                }
-            });
-        }
-    }
 
     @OnClick(R.id.sign_up_button)
     public void signUp() {
@@ -190,6 +127,60 @@ public class LoginActivity extends Activity {
         }
     }
 
+    private void getToken(String userID) {
+        String url = "http://" + getSERVER_IP() + ":8080/getToken?userID=" + userID;
+        Log.i(TAG, "postId: 开始请求token");
+        HttpUtil.getDataAsync(url, this, new Runnable() {
+            @Override
+            public void run() {
+                String responseData = HttpUtil.getResponseData();
+                Log.i(TAG, "onResponse: 返回token：" + responseData);
+                Gson gson = new Gson();
+                userToken = gson.fromJson(responseData, new TypeToken<UserToken>() {
+                }.getType());
+                Log.i(TAG, "responseData" + responseData + ", token:" + userToken.getToken());
+                Constant.setCurrToken(userToken.getToken());
+                connectRongCloud();
+            }
+        });
+    }
 
+
+    private void connectRongCloud() {
+        String packageName = getApplicationInfo().packageName;
+        String context = App.getCurProcessName(getApplicationContext());
+        Log.i(TAG, "connectRongCloud: 连接服务器");
+        if (packageName.equals(context)) {
+            Log.i(TAG, "connectRongCloud: 验证包名一致！！！！！！！！！！！！！！！！！！！" +
+                    "\ngetApplicationInfo().packageName=========" + packageName +
+                    "\nApp.getCurProcessName(getApplicationContext())==========" + context);
+
+            RongIM.connect(Constant.getCurrToken(), new RongIMClient.ConnectCallback() {
+                @Override
+                public void onTokenIncorrect() {
+                    Log.i(TAG, "onTokenIncorrect: Token不正确");
+                }
+
+                @Override
+                public void onSuccess(String userID) {
+                    //userID，是我们在申请token时填入的userID
+                    System.out.println("========userID" + userID);
+                    Log.i(TAG, "connectRongCloud: 连接服务器成功");
+                }
+
+                @Override
+                public void onError(RongIMClient.ErrorCode errorCode) {
+                    Log.i(TAG, "onError: 连接融云出错");
+                }
+            });
+        } else {
+            Log.i(TAG, "connectRongCloud: 包名不一致！！！！！！！！！！！！！！！！！！！" +
+                    "\nAgetApplicationInfo().packageName=========" + packageName +
+                    "\nApp.getCurProcessName(getApplicationContext())==========" + context);
+        }
+    }
 }
+
+
+
 

@@ -1,9 +1,10 @@
 package com.mrbattery.encounter.entity;
 
 public class Keyword {
-    private int keywordID;
-    private String keywordName;
-    private int parentTopicID;
+    protected int keywordID;
+    protected String keywordName;
+    protected int parentTopicID;
+    protected String parentTopicName;
 
     public int getKeywordID() {
         return keywordID;
@@ -29,13 +30,21 @@ public class Keyword {
         this.parentTopicID = parentTopicID;
     }
 
+    public String getParentTopicName() {
+        return parentTopicName;
+    }
+
+    public void setParentTopicName(String parentTopicName) {
+        this.parentTopicName = parentTopicName;
+    }
+
     @Override
     public String toString() {
-        return "KeywordEntity{" +
+        return "Keyword{" +
                 "keywordID=" + keywordID +
                 ", keywordName='" + keywordName + '\'' +
                 ", parentTopicID=" + parentTopicID +
+                ", parentTopicName=" + parentTopicName +
                 '}';
     }
-
 }

@@ -56,25 +56,30 @@ public class HttpUtil {
     private static String url;
 
 
-//    public static String sendSyncOkHttpRequest(String address) throws IOException {
-//        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-//        StrictMode.setThreadPolicy(policy);
-//        OkHttpClient client = new OkHttpClient.Builder()
-//                .connectTimeout(20, TimeUnit.SECONDS)
-//                .readTimeout(20, TimeUnit.SECONDS).build();
-//        Request request = new Request.Builder().url(address).build();
-//        Response response = client.newCall(request).execute();
-//
-//        return response.body().string();
-//    }
+/*    public static String getDataSync(String address){
+        OkHttpClient client = new OkHttpClient.Builder()
+                .connectTimeout(20, TimeUnit.SECONDS)
+                .readTimeout(20, TimeUnit.SECONDS).build();
+        Request request = new Request.Builder().url(address).build();
+        Response response = null;
+        try {
+            response = client.newCall(request).execute();
+            return response.body().string();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return "network_error";
+        }
+    }*/
 
-    public static String getDatasync(String address) {
+    public static String getDataSync(String address) {
         url = address;
         new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
-                    OkHttpClient client = new OkHttpClient();//创建OkHttpClient对象
+                    OkHttpClient client = new OkHttpClient.Builder()
+                            .connectTimeout(20, TimeUnit.SECONDS)
+                            .readTimeout(20, TimeUnit.SECONDS).build();//创建OkHttpClient对象
                     Request request = new Request.Builder()
                             .url(url)//请求接口。如果需要传参拼接到接口后面。
                             .build();//创建Request 对象
@@ -90,6 +95,7 @@ public class HttpUtil {
             }
         }).start();
         return responseData;
+
     }
 
     public static void getDataAsync(String address, final Context context, final Runnable runnable) {
@@ -150,7 +156,7 @@ public class HttpUtil {
         });
     }
 
-    public static User parseJSONWithGSON() {
+    public static User parseJSONWithGSON(String responseData) {
         //使用轻量级的Gson解析得到的json
         Gson gson = new Gson();
         if (responseData.equals("network_error")) {

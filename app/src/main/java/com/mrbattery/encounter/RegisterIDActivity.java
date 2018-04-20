@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.TextView;
 
+import com.mrbattery.encounter.constant.Constant;
 import com.mrbattery.encounter.entity.User;
 
 import butterknife.BindView;
@@ -21,12 +22,14 @@ public class RegisterIDActivity extends AppCompatActivity {
     @BindView(R.id.tv_user_id)
     TextView tvUserID;
 
+    User user;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_id);
         //接受上一个Activity传来的数据
-        User user = (User) getIntent().getSerializableExtra("user");
+        user = (User) getIntent().getSerializableExtra("user");
         Log.i(TAG, "onCreate: "+user.getUserName());
         Log.i(TAG, "onCreate: "+user.getUserID());
         ButterKnife.bind(this);
@@ -37,6 +40,7 @@ public class RegisterIDActivity extends AppCompatActivity {
 
     @OnClick(R.id.encounter_button)
     public void encounter() {
+        Constant.setCurrUserID(user.getUserID());
         Intent intent = new Intent(RegisterIDActivity.this, MainActivity.class);
         startActivity(intent);
     }

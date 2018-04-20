@@ -212,7 +212,7 @@
                         android:textSize="@dimen/text_small" />
 
                     <TextView
-                        android:id="@id/tv_user_name"
+                        android:id="@+id/tv_user_name2"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="未设置昵称"
@@ -235,7 +235,7 @@
                         android:textSize="@dimen/text_small" />
 
                     <TextView
-                        android:id="@+id/label"
+                        android:id="@+id/tv_keywords"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:lineSpacingMultiplier="1.5"
