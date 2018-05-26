@@ -26,7 +26,7 @@ import io.rong.imkit.RongIM;
 import io.rong.imlib.RongIMClient;
 
 import static com.makeramen.roundedimageview.RoundedDrawable.TAG;
-import static com.mrbattery.encounter.constant.Constant.getSERVER_IP;
+import static com.mrbattery.encounter.constant.API.getSERVER_IP;
 
 public class RegisterPasswordActivity extends AppCompatActivity {
 
@@ -63,10 +63,11 @@ public class RegisterPasswordActivity extends AppCompatActivity {
             String url = "http://" + getSERVER_IP() + ":8080/register?" +
                     "userName=" + userName + "&password=" + password;
             Log.i(TAG, "register: " + url);
-            HttpUtil.getDataAsync(url, this, new Runnable() {
+            final HttpUtil httpUtil = new HttpUtil();
+            httpUtil.getDataAsync(url, this, new Runnable() {
                 @Override
                 public void run() {
-                    String responseData = HttpUtil.getResponseData();
+                    String responseData = httpUtil.getResponseData();
                     if (responseData != null) {
                         Gson gson = new Gson();
                         User user = gson.fromJson(responseData, new TypeToken<User>() {
@@ -112,10 +113,11 @@ public class RegisterPasswordActivity extends AppCompatActivity {
     private void getToken(String userID) {
         String url = "http://" + getSERVER_IP() + ":8080/getToken?userID=" + userID;
         Log.i(ContentValues.TAG, "postId: 开始请求token");
-        HttpUtil.getDataAsync(url, this, new Runnable() {
+        final HttpUtil httpUtil = new HttpUtil();
+        httpUtil.getDataAsync(url, this, new Runnable() {
             @Override
             public void run() {
-                String responseData = HttpUtil.getResponseData();
+                String responseData = httpUtil.getResponseData();
                 Log.i(ContentValues.TAG, "onResponse: 返回token：" + responseData);
                 Gson gson = new Gson();
                 userToken = gson.fromJson(responseData, new TypeToken<UserToken>() {

@@ -26,7 +26,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 import static com.makeramen.roundedimageview.RoundedDrawable.TAG;
-import static com.mrbattery.encounter.constant.Constant.getSERVER_IP;
+import static com.mrbattery.encounter.constant.API.getSERVER_IP;
 
 public class EditProfileActivity extends AppCompatActivity {
 
@@ -110,10 +110,11 @@ public class EditProfileActivity extends AppCompatActivity {
                 + "&constellation=" + Constant.getCurrConstellation()
                 + "&script=" + script;
         Log.i(TAG, url);
-        HttpUtil.getDataAsync(url, this, new Runnable() {
+        final HttpUtil httpUtil = new HttpUtil();
+        httpUtil.getDataAsync(url, this, new Runnable() {
             @Override
             public void run() {
-                String responseData = HttpUtil.getResponseData();
+                String responseData = httpUtil.getResponseData();
                         Log.d(TAG, "responseData: " + responseData);
                 switch (responseData) {
                     case "success":

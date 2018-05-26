@@ -9,8 +9,6 @@ public class Constant {
     private static int currConstellation;
     //当前用户Token
     private static String currToken;
-    //网络url
-    private static String SERVER_IP = "10.236.141.193";
 
     //十二星座
     public static final String unknownConstellation = "未知星座";
@@ -172,7 +170,4 @@ public class Constant {
         Constant.currUserID = temp;
     }
 
-    public static String getSERVER_IP() {
-        return SERVER_IP;
-    }
 }

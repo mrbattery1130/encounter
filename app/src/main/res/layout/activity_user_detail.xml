@@ -13,7 +13,7 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?android:attr/actionBarSize"
-        android:background="?android:attr/colorPrimary"
+        android:background="@color/main_color"
         app:layout_collapseMode="pin"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
 
@@ -25,7 +25,7 @@
             android:orientation="horizontal">
 
             <ImageView
-                android:id="@+id/iv_close"
+                android:id="@+id/iv_back"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
                 android:layout_marginRight="8dp"
@@ -91,9 +91,9 @@
                                 android:id="@+id/iv_avatar"
                                 android:layout_width="48dp"
                                 android:layout_height="48dp"
+                                android:background="@drawable/default_avatar"
                                 android:elevation="2dp"
                                 android:scaleType="centerCrop"
-                                android:background="@drawable/default_avatar"
                                 app:riv_border_color="@android:color/white"
                                 app:riv_border_width="2dp"
                                 app:riv_oval="true" />
@@ -166,6 +166,22 @@
                     </LinearLayout>
 
                 </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tv_appreciate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top|end"
+                    android:layout_margin="16dp"
+                    android:background="@drawable/appreciate_bg"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:paddingBottom="8dp"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp"
+                    android:paddingTop="8dp"
+                    android:text="欣赏TA"
+                    android:textColor="@drawable/appreciate_text_color"
+                    android:textSize="@dimen/text_medium" />
 
             </FrameLayout>
 

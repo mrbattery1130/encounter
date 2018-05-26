@@ -21,7 +21,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 import static com.makeramen.roundedimageview.RoundedDrawable.TAG;
-import static com.mrbattery.encounter.constant.Constant.getSERVER_IP;
+import static com.mrbattery.encounter.constant.API.getSERVER_IP;
 
 public class EPQActivity extends AppCompatActivity {
 
@@ -80,36 +80,66 @@ public class EPQActivity extends AppCompatActivity {
                 if (EPQTest.scoreRule[EPQTest.E][i] == EPQTest.positive) {
                     eScore++;
                     Log.i(TAG, "第" + (i + 1) + "题，是，E得1分/共" + eScore + "分");
+                } else if (EPQTest.scoreRule[EPQTest.E][i] == EPQTest.negative) {
+                    eScore--;
+                    Log.i(TAG, "第" + (i + 1) + "题，是，E失1分/共" + eScore + "分");
                 }
+
                 if (EPQTest.scoreRule[EPQTest.N][i] == EPQTest.positive) {
                     nScore++;
-                    Log.i(TAG, "第" + (i + 1) + "题，是，N得1分/共" + eScore + "分");
+                    Log.i(TAG, "第" + (i + 1) + "题，是，N得1分/共" + nScore + "分");
+                } else if (EPQTest.scoreRule[EPQTest.N][i] == EPQTest.negative) {
+                    nScore--;
+                    Log.i(TAG, "第" + (i + 1) + "题，是，N失1分/共" + nScore + "分");
                 }
+
                 if (EPQTest.scoreRule[EPQTest.P][i] == EPQTest.positive) {
                     pScore++;
-                    Log.i(TAG, "第" + (i + 1) + "题，是，P得1分/共" + eScore + "分");
+                    Log.i(TAG, "第" + (i + 1) + "题，是，P得1分/共" + pScore + "分");
+                } else if (EPQTest.scoreRule[EPQTest.P][i] == EPQTest.negative) {
+                    pScore--;
+                    Log.i(TAG, "第" + (i + 1) + "题，是，P失1分/共" + pScore + "分");
                 }
+
                 if (EPQTest.scoreRule[EPQTest.L][i] == EPQTest.positive) {
                     lScore++;
-                    Log.i(TAG, "第" + (i + 1) + "题，是，L得1分/共" + eScore + "分");
+                    Log.i(TAG, "第" + (i + 1) + "题，是，L得1分/共" + lScore + "分");
+                }else if (EPQTest.scoreRule[EPQTest.L][i] == EPQTest.negative){
+                    lScore--;
+                    Log.i(TAG, "第" + (i + 1) + "题，是，L失1分/共" + lScore + "分");
                 }
                 break;
             case R.id.no_btn:
                 if (EPQTest.scoreRule[EPQTest.E][i] == EPQTest.negative) {
                     eScore++;
-                    Log.i(TAG, "第" + (i + 1) + "题，否，E得1分/共" + eScore + "分");
+                    Log.i(TAG, "第" + (i + 1) + "题，是，E得1分/共" + eScore + "分");
+                } else if (EPQTest.scoreRule[EPQTest.E][i] == EPQTest.positive) {
+                    eScore--;
+                    Log.i(TAG, "第" + (i + 1) + "题，是，E失1分/共" + eScore + "分");
                 }
+
                 if (EPQTest.scoreRule[EPQTest.N][i] == EPQTest.negative) {
                     nScore++;
-                    Log.i(TAG, "第" + (i + 1) + "题，否，N得1分/共" + eScore + "分");
+                    Log.i(TAG, "第" + (i + 1) + "题，是，N得1分/共" + nScore + "分");
+                } else if (EPQTest.scoreRule[EPQTest.N][i] == EPQTest.positive) {
+                    nScore--;
+                    Log.i(TAG, "第" + (i + 1) + "题，是，N失1分/共" + nScore + "分");
                 }
+
                 if (EPQTest.scoreRule[EPQTest.P][i] == EPQTest.negative) {
                     pScore++;
-                    Log.i(TAG, "第" + (i + 1) + "题，否，P得1分/共" + eScore + "分");
+                    Log.i(TAG, "第" + (i + 1) + "题，是，P得1分/共" + pScore + "分");
+                } else if (EPQTest.scoreRule[EPQTest.P][i] == EPQTest.positive) {
+                    pScore--;
+                    Log.i(TAG, "第" + (i + 1) + "题，是，P失1分/共" + pScore + "分");
                 }
+
                 if (EPQTest.scoreRule[EPQTest.L][i] == EPQTest.negative) {
                     lScore++;
-                    Log.i(TAG, "第" + (i + 1) + "题，否，L得1分/共" + eScore + "分");
+                    Log.i(TAG, "第" + (i + 1) + "题，是，L得1分/共" + lScore + "分");
+                }else if (EPQTest.scoreRule[EPQTest.L][i] == EPQTest.positive){
+                    lScore--;
+                    Log.i(TAG, "第" + (i + 1) + "题，是，L失1分/共" + lScore + "分");
                 }
                 break;
             default:
@@ -150,10 +180,11 @@ public class EPQActivity extends AppCompatActivity {
                 + "&pScore=" + pScore
                 + "&lScore=" + lScore;
         Log.i(TAG, url);
-        HttpUtil.getDataAsync(url, this, new Runnable() {
+        final HttpUtil httpUtil = new HttpUtil();
+        httpUtil.getDataAsync(url, this, new Runnable() {
             @Override
             public void run() {
-                String responseData = HttpUtil.getResponseData();
+                String responseData = httpUtil.getResponseData();
                 if (responseData.equals("success")) {
                     switchEPQView(R.id.ll_epq_result);
                     Log.i(TAG, "run: post successfully!!!");
@@ -162,7 +193,6 @@ public class EPQActivity extends AppCompatActivity {
                 }
             }
         });
-
 
 
     }

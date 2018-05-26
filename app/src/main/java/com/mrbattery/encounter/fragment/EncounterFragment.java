@@ -15,9 +15,11 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.mrbattery.encounter.MainActivity;
 import com.mrbattery.encounter.R;
 import com.mrbattery.encounter.UserDetailActivity;
 import com.mrbattery.encounter.adapter.EncounterAdapter;
@@ -33,12 +35,9 @@ import butterknife.Unbinder;
 
 import static android.content.ContentValues.TAG;
 import static android.widget.LinearLayout.VERTICAL;
-import static com.mrbattery.encounter.constant.Constant.getSERVER_IP;
+import static com.mrbattery.encounter.constant.API.getSERVER_IP;
 
 public class EncounterFragment extends Fragment {
-
-    @BindView(R.id.toolbar)
-    Toolbar toolbar;
 
     private Unbinder unbinder;
 
@@ -63,27 +62,23 @@ public class EncounterFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_encounter, container, false);
         unbinder = ButterKnife.bind(this, view);
 
-        //toolbar代替actionbar
-//        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
-        toolbar.inflateMenu(R.menu.menu_parent_fragment);
-        setHasOptionsMenu(true);
-
         //初始化布局管理器
         layoutManager = new LinearLayoutManager(this.getContext(), VERTICAL, false);
 
-        getData();
+        loadData();
 
         // Inflate the layout for this fragment
         return view;
     }
 
-    private void getData() {
+    private void loadData() {
         String url = "http://" + getSERVER_IP() + ":8080/get_matching_user?userID=" + Constant.getCurrUserID();
-        Log.i(TAG, "getData: " + url);
-        HttpUtil.getDataAsync(url, getActivity(), new Runnable() {
+        Log.i(TAG, "loadData: " + url);
+        final HttpUtil httpUtil = new HttpUtil();
+        httpUtil.getDataAsync(url, getActivity(), new Runnable() {
             @Override
             public void run() {
-                String responseData = HttpUtil.getResponseData();
+                String responseData = httpUtil.getResponseData();
                 Gson gson = new Gson();
                 ArrayList<MatchedUser> matchedUsers = gson.fromJson(responseData, new TypeToken<ArrayList<MatchedUser>>() {
                 }.getType());
@@ -116,6 +111,10 @@ public class EncounterFragment extends Fragment {
                 recyclerView.setLayoutManager(layoutManager);
                 //设置adapter
                 recyclerView.setAdapter(adapter);
+                //停止刷新
+                swipeRefreshWidget.setRefreshing(false);
+                Toast.makeText(getContext(), "刷新完成", Toast.LENGTH_SHORT).show();
+                Log.i(TAG, "run: 刷新完成");
             }
         });
 
@@ -144,13 +143,11 @@ public class EncounterFragment extends Fragment {
         swipeRefreshWidget.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                getData();
+                loadData();
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
                         // TODO Auto-generated method stub
-//                        Toast.makeText(getContext(), "刷新完成", Toast.LENGTH_SHORT).show();
-                        Log.i(TAG, "run: 刷新完成");
                         swipeRefreshWidget.setRefreshing(false);
                     }
                 }, 6000);

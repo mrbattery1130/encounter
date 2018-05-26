@@ -1,6 +1,8 @@
 package com.mrbattery.encounter;
 
 import android.content.Context;
+import android.content.DialogInterface;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -27,7 +29,7 @@ import io.rong.imkit.RongIM;
 import io.rong.imlib.model.Conversation;
 
 import static com.makeramen.roundedimageview.RoundedDrawable.TAG;
-import static com.mrbattery.encounter.constant.Constant.getSERVER_IP;
+import static com.mrbattery.encounter.constant.API.getSERVER_IP;
 
 public class UserDetailActivity extends AppCompatActivity {
 
@@ -55,8 +57,12 @@ public class UserDetailActivity extends AppCompatActivity {
     @BindView(R.id.tv_keywords)
     TextView tvKeywords;
 
+    @BindView(R.id.tv_appreciate)
+    TextView tvAppreciate;
+
     Context context;
 
+    //当前页面对应的用户
     User user;
 
     @Override
@@ -73,12 +79,19 @@ public class UserDetailActivity extends AppCompatActivity {
         user = (User) getIntent().getSerializableExtra("user");
         Constant.setCurrConstellation(user.getConstellation());
 
+        loadProfile();
+        loadKeyword();
+        loadAppreciate();
+    }
+
+    private void loadProfile() {
         String url = "http://" + getSERVER_IP() + ":8080/get_profile?userID=" + user.getUserID();
         Log.i(TAG, url);
-        HttpUtil.getDataAsync(url, this, new Runnable() {
+        final HttpUtil httpUtil = new HttpUtil();
+        httpUtil.getDataAsync(url, this, new Runnable() {
             @Override
             public void run() {
-                String responseData = HttpUtil.getResponseData();
+                String responseData = httpUtil.getResponseData();
                 Gson gson = new Gson();
                 user = gson.fromJson(responseData, new TypeToken<User>() {
                 }.getType());
@@ -96,18 +109,45 @@ public class UserDetailActivity extends AppCompatActivity {
                 //加载封面图片资源
                 String coverUrl = user.getCover();
                 Picasso.get().load(coverUrl).into(ivCover);
-
-                loadKeyword(user.getUserID());
             }
         });
     }
-    private void loadKeyword(int userID) {
-        String url = "http://" + getSERVER_IP() + ":8080/get_keyword?userID=" + userID;
+
+    private void loadAppreciate() {
+        String url = "http://" + getSERVER_IP() + ":8080/get_appreciating?userID=" + Constant.getCurrUserID() + "&targetUserID=" + user.getUserID();
         Log.i(RoundedImageView.TAG, url);
-        HttpUtil.getDataAsync(url, this, new Runnable() {
+        final HttpUtil httpUtil = new HttpUtil();
+        httpUtil.getDataAsync(url, this, new Runnable() {
             @Override
             public void run() {
-                String responseData = HttpUtil.getResponseData();
+                String responseData = httpUtil.getResponseData();
+                switch (responseData) {
+                    case "true":
+                        tvAppreciate.setSelected(false);
+                        tvAppreciate.setText("已欣赏");
+                        Log.i(TAG, "run: 已经欣赏啦！！！按钮不可用就好啦");
+                        break;
+                    case "false":
+                        tvAppreciate.setSelected(true);
+                        tvAppreciate.setText("欣赏TA");
+                        Log.i(TAG, "run: 还没欣赏呐！！！按钮可用呐");
+                        break;
+                    default:
+                        break;
+                }
+            }
+        });
+
+    }
+
+    private void loadKeyword() {
+        String url = "http://" + getSERVER_IP() + ":8080/get_keyword?userID=" + user.getUserID();
+        Log.i(RoundedImageView.TAG, url);
+        final HttpUtil httpUtil = new HttpUtil();
+        httpUtil.getDataAsync(url, this, new Runnable() {
+            @Override
+            public void run() {
+                String responseData = httpUtil.getResponseData();
                 Gson gson = new Gson();
                 if (responseData == "[]") {
 
@@ -137,6 +177,9 @@ public class UserDetailActivity extends AppCompatActivity {
                         i++;
                         Log.i(RoundedImageView.TAG, "run: keywordDisplay:" + keywordDisplay);
                     }
+                    if (keywordDisplay.equals("")) {
+                        keywordDisplay = getString(R.string.error_no_keyword);
+                    }
                     tvKeywords.setText(keywordDisplay);
                 }
             }
@@ -147,5 +190,83 @@ public class UserDetailActivity extends AppCompatActivity {
     @OnClick(R.id.btn_chat)
     public void chat() {
         RongIM.getInstance().startConversation(this, Conversation.ConversationType.PRIVATE, String.valueOf(user.getUserID()), user.getUserName());
+    }
+
+    @OnClick(R.id.tv_appreciate)
+    public void handleAppreciate() {
+        if (tvAppreciate.isSelected()) {
+            //选中状态说明还没有欣赏，用户想要欣赏
+            appreciate();
+        } else {
+            //未选中状态说明已经欣赏，用户想要取消欣赏
+            new AlertDialog.Builder(context)
+                    .setIcon(R.drawable.icon_encounter)
+                    .setTitle("确定不再欣赏" + user.getUserName() + "吗？")
+//                .setMessage("不保留更改吗？")
+                    .setNegativeButton("取消", null)
+                    .setPositiveButton("确认", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            unappreciate();
+                        }
+                    }).show();
+        }
+    }
+
+    public void appreciate() {
+        String url = "http://" + getSERVER_IP() + ":8080/appreciate?userID=" + Constant.getCurrUserID() + "&targetUserID=" + user.getUserID();
+        Log.i(TAG, "appreciate: url: " + url);
+        final HttpUtil httpUtil = new HttpUtil();
+        httpUtil.getDataAsync(url, context, new Runnable() {
+            @Override
+            public void run() {
+                String responseData = httpUtil.getResponseData();
+                switch (responseData) {
+                    case "1":
+                        Log.i(TAG, "run: 欣赏成功");
+                        Toast.makeText(context, "欣赏成功", Toast.LENGTH_SHORT).show();
+                        break;
+                    case "0":
+                        Log.i(TAG, "run: 欣赏失败");
+                        Toast.makeText(context, "欣赏失败", Toast.LENGTH_SHORT).show();
+                        break;
+                    default:
+                        break;
+                }
+                loadAppreciate();
+            }
+        });
+
+    }
+
+    public void unappreciate() {
+        String url = "http://" + getSERVER_IP() + ":8080/unappreciate?userID=" + Constant.getCurrUserID() + "&targetUserID=" + user.getUserID();
+        Log.i(TAG, "appreciate: url: " + url);
+        final HttpUtil httpUtil = new HttpUtil();
+        httpUtil.getDataAsync(url, this, new Runnable() {
+            @Override
+            public void run() {
+                String responseData = httpUtil.getResponseData();
+                switch (responseData) {
+                    case "1":
+                        Log.i(TAG, "run: 取消欣赏成功");
+                        Toast.makeText(context, "取消欣赏成功", Toast.LENGTH_SHORT).show();
+                        break;
+                    case "0":
+                        Log.i(TAG, "run: 未欣赏该用户，不能取消欣赏");
+                        Toast.makeText(context, "未欣赏该用户，不能取消欣赏", Toast.LENGTH_SHORT).show();
+                        break;
+                    default:
+                        break;
+                }
+                loadAppreciate();
+            }
+        });
+
+    }
+
+    @OnClick(R.id.iv_back)
+    public void goBack() {
+        finish();
     }
 }

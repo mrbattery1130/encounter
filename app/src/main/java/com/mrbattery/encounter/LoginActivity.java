@@ -2,14 +2,13 @@ package com.mrbattery.encounter;
 
 import android.app.Activity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -25,7 +24,7 @@ import io.rong.imkit.RongIM;
 import io.rong.imlib.RongIMClient;
 
 import static android.content.ContentValues.TAG;
-import static com.mrbattery.encounter.constant.Constant.getSERVER_IP;
+import static com.mrbattery.encounter.constant.API.getSERVER_IP;
 
 
 public class LoginActivity extends Activity {
@@ -39,11 +38,13 @@ public class LoginActivity extends Activity {
     @BindView(R.id.sign_in_button)
     public Button signInBtn;
 
-    @BindView(R.id.login_progress)
+/*    @BindView(R.id.login_progress)
     public ProgressBar loginProgress;
 
     @BindView(R.id.login_overlay)
-    public View loginOverlay;
+    public View loginOverlay;*/
+
+    private ProgressDialog progressDialog;
 
     //记录用户首次点击返回键的时间
     private long firstTime = 0;
@@ -59,9 +60,9 @@ public class LoginActivity extends Activity {
         //绑定activity
         ButterKnife.bind(this);
         //初始化加载进度条和遮罩
-        loginProgress.setVisibility(View.GONE);
-        loginOverlay.setVisibility(View.GONE);
-        loginOverlay.setClickable(false);
+//        loginProgress.setVisibility(View.GONE);
+//        loginOverlay.setVisibility(View.GONE);
+//        loginOverlay.setClickable(false);
     }
 
     @OnClick(R.id.sign_in_button)
@@ -71,21 +72,23 @@ public class LoginActivity extends Activity {
         String password = tvPassword.getText().toString();
         String url = "http://" + getSERVER_IP() + ":8080/login?userID=" + userID + "&password=" + password;
         //显示加载进度条和遮罩
-        loginProgress.setVisibility(View.VISIBLE);
-        loginOverlay.setVisibility(View.VISIBLE);
-        loginOverlay.setClickable(true);
-//        Toast.makeText(this, "点击了登录按钮！！！！", Toast.LENGTH_SHORT).show();
+//        loginProgress.setVisibility(View.VISIBLE);
+//        loginOverlay.setVisibility(View.VISIBLE);
+//        loginOverlay.setClickable(true);
+        buildProgressDialog(R.string.notice_logging_in);
         Log.i(TAG, url);
         Log.i(TAG, "signIn: 开始请求数据");
-        HttpUtil.getDataAsync(url, this, new Runnable() {
+        final HttpUtil httpUtil = new HttpUtil();
+        httpUtil.getDataAsync(url, this, new Runnable() {
             @Override
             public void run() {
-                String responseData = HttpUtil.getResponseData();
+                String responseData = httpUtil.getResponseData();
                 Log.i(TAG, "run: responseData: " + responseData);
                 //隐藏加载进度条和遮罩
-                loginProgress.setVisibility(View.INVISIBLE);
-                loginOverlay.setVisibility(View.INVISIBLE);
-                loginOverlay.setClickable(false);
+//                loginProgress.setVisibility(View.INVISIBLE);
+//                loginOverlay.setVisibility(View.INVISIBLE);
+//                loginOverlay.setClickable(false);
+                cancelProgressDialog();
                 if (responseData.equals("success")) {
                     Log.i(TAG, "run: login successful!!!");
                     Constant.setCurrUserID(userID);
@@ -130,10 +133,11 @@ public class LoginActivity extends Activity {
     private void getToken(String userID) {
         String url = "http://" + getSERVER_IP() + ":8080/getToken?userID=" + userID;
         Log.i(TAG, "postId: 开始请求token");
-        HttpUtil.getDataAsync(url, this, new Runnable() {
+        final HttpUtil httpUtil = new HttpUtil();
+        httpUtil.getDataAsync(url, this, new Runnable() {
             @Override
             public void run() {
-                String responseData = HttpUtil.getResponseData();
+                String responseData = httpUtil.getResponseData();
                 Log.i(TAG, "onResponse: 返回token：" + responseData);
                 Gson gson = new Gson();
                 userToken = gson.fromJson(responseData, new TypeToken<UserToken>() {
@@ -179,6 +183,27 @@ public class LoginActivity extends Activity {
                     "\nApp.getCurProcessName(getApplicationContext())==========" + context);
         }
     }
+
+    public void buildProgressDialog(int id) {
+        if (progressDialog == null) {
+            progressDialog = new ProgressDialog(LoginActivity.this);
+            progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        }
+        progressDialog.setMessage(getString(id));
+        progressDialog.setCancelable(false);
+        progressDialog.show();
+    }
+
+    /**
+     * @Description: TODO 取消加载框
+     */
+    public void cancelProgressDialog() {
+        if (progressDialog != null)
+            if (progressDialog.isShowing()) {
+                progressDialog.dismiss();
+            }
+    }
+
 }
 
 

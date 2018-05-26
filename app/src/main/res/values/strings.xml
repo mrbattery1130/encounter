@@ -31,7 +31,10 @@
     <string name="error_mismatching_password">两次密码不一致</string>
     <string name="error_field_required">输入不能为空，请检查</string>
     <string name="error_no_test_record">没有测试记录！点击开始测试</string>
-    <string name="error_no_keyword">没有设置话题标签！</string>
+    <string name="error_no_keyword">没有设置话题标签</string>
+    <string name="notice_loading_data">数据加载中</string>
+    <string name="notice_posting_data">数据提交中</string>
+    <string name="notice_logging_in">登录中</string>
     <string name="permission_rationale">"Contacts permissions are needed for providing email completions."</string>
 
     <!-- TODO: Remove or change this placeholder text -->
@@ -41,6 +44,8 @@
     <string name="title_activity_epq">EPQ测试</string>
     <string name="title_activity_constellation">选择星座</string>
     <string name="title_activity_edit_keyword">编辑话题标签</string>
+    <string name="title_activity_appreciating_list">我欣赏的人</string>
+    <string name="title_activity_fans_list">欣赏我的人</string>
 
     <string name="epq_introduction">艾森克人格问卷(简称EPQ)是英国伦敦大学心理系和精神病研究所艾森克教授编制的, 他搜集了大量数据，通过因素分析归纳提出决定人格的三个基本因素: 内外向性(E)、情绪性(N)和精神质(P), 人们在这三方面的不同倾向和不同表现程度, 便构成了不同的人格特征。</string>
 
@@ -57,4 +62,5 @@
     <string name="constellation11">水瓶座</string>
     <string name="constellation12">双鱼座</string>
     <string name="constellation00">未知星座</string>
+    <string name="tip_edit_keyword">请选择最喜欢的标签，可以多选或不选</string>
 </resources>

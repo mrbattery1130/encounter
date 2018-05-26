@@ -52,7 +52,7 @@ public class EncounterAdapter extends RecyclerView.Adapter<EncounterAdapter.View
     }
 
     @Override
-    public void onBindViewHolder(final ViewHolder holder, final int position) {
+    public void onBindViewHolder(final ViewHolder holder, int position) {
 
         MatchedUser matchedUser = mData.get(position);
         double degree = (double) (matchedUser.getMatchingDegree());
@@ -71,29 +71,11 @@ public class EncounterAdapter extends RecyclerView.Adapter<EncounterAdapter.View
         String avatarUrl = matchedUser.getAvatar();
         Log.i(TAG, "run: 开始加载头像" + position);
         Picasso.get().load(avatarUrl).into(holder.ivAvatar);
-        /*HttpUtil.getPictureAsync(avatarUrl, context, new Runnable() {
-            @Override
-            public void run() {
-                Bitmap avatarBmp = HttpUtil.getResponseBmp();
-                    holder.ivAvatar.setImageBitmap(avatarBmp);
-                    AnimationUtil.startAlphaAnimation(holder.ivAvatar);
-                    Log.i(TAG, "run: 完成加载头像" + position);
-            }
-        });*/
 
         //加载封面图片资源
         String coverUrl = matchedUser.getCover();
         Log.i(TAG, "run: 开始加载封面" + position);
         Picasso.get().load(coverUrl).into(holder.ivCover);
-        /*HttpUtil.getPictureAsync(coverUrl, context, new Runnable() {
-            @Override
-            public void run() {
-                Bitmap coverBmp = HttpUtil.getResponseBmp();
-                    holder.ivCover.setImageBitmap(coverBmp);
-                    AnimationUtil.startAlphaAnimation(holder.ivCover);
-                    Log.i(TAG, "run: 完成加载封面" + position);
-            }
-        });*/
 
         //填充onCreateViewHolder方法返回的holder中的控件
         if (mOnItemClickListener != null) {

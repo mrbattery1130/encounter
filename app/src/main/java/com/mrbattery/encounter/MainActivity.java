@@ -36,7 +36,7 @@ import io.rong.imlib.model.UserInfo;
 
 import static android.view.View.GONE;
 import static com.makeramen.roundedimageview.RoundedDrawable.TAG;
-import static com.mrbattery.encounter.constant.Constant.getSERVER_IP;
+import static com.mrbattery.encounter.constant.API.getSERVER_IP;
 import static java.lang.Thread.sleep;
 
 public class MainActivity extends FragmentActivity
@@ -59,9 +59,9 @@ public class MainActivity extends FragmentActivity
     public ImageView ivEncounter;
     @BindView(R.id.iv_profile)
     public ImageView ivProfile;
-    //消息列表的Toolbar
-    @BindView(R.id.message_toolbar)
-    Toolbar messageToolbar;
+    //Toolbar
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
 
     //记录用户首次点击返回键的时间
     private long firstTime = 0;
@@ -90,7 +90,7 @@ public class MainActivity extends FragmentActivity
         ivProfile.setOnClickListener(this);
         mUnreadNumView.setDragListener(this);
 
-        messageToolbar.setVisibility(GONE);
+        toolbar.setVisibility(View.VISIBLE);
 
         fragmentManager = getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
@@ -114,7 +114,8 @@ public class MainActivity extends FragmentActivity
             case R.id.iv_message:
                 reIvSelect();
                 ivMessage.setSelected(true);
-                messageToolbar.setVisibility(View.VISIBLE);
+//                toolbar.setVisibility(View.VISIBLE);
+                toolbar.setTitle(R.string.title_fragment_message);
                 if (messageFragment == null) {
                     messageFragment = initConversationList();
                     transaction.add(R.id.id_main_container, messageFragment);
@@ -126,7 +127,8 @@ public class MainActivity extends FragmentActivity
             case R.id.iv_encounter:
                 reIvSelect();
                 ivEncounter.setSelected(true);
-                messageToolbar.setVisibility(GONE);
+//                toolbar.setVisibility(GONE);
+                toolbar.setTitle(R.string.title_fragment_encounter);
                 if (encounterFragment == null) {
                     encounterFragment = new EncounterFragment();
                     transaction.add(R.id.id_main_container, encounterFragment);
@@ -138,7 +140,8 @@ public class MainActivity extends FragmentActivity
             case R.id.iv_profile:
                 reIvSelect();
                 ivProfile.setSelected(true);
-                messageToolbar.setVisibility(GONE);
+//                toolbar.setVisibility(GONE);
+                toolbar.setTitle(R.string.title_fragment_profile);
                 if (profileFragment == null) {
                     profileFragment = new ProfileFragment();
                     transaction.add(R.id.id_main_container, profileFragment);
@@ -235,10 +238,11 @@ public class MainActivity extends FragmentActivity
             public io.rong.imlib.model.UserInfo getUserInfo(String userID) {
                 final String url = "http://" + getSERVER_IP() + ":8080/get_profile?userID=" + userID;
                 Log.i(TAG, "getUserInfo: URL:" + url);
-                HttpUtil.getDataAsync(url, context, new Runnable() {
+                final HttpUtil httpUtil = new HttpUtil();
+                httpUtil.getDataAsync(url, context, new Runnable() {
                     @Override
                     public void run() {
-                        responseData = HttpUtil.getResponseData();
+                        responseData = httpUtil.getResponseData();
                         Log.i(TAG, "getUserInfo: responseData:" + responseData);
                         if (responseData == null) {
 

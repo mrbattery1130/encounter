@@ -10,6 +10,7 @@ public class EPQTest {
 
     public static final int positive = 1;
     public static final int negative = -1;
+    public static final int neutral = 0;
 
     public static final int highScore = 0;
     public static final int middleScore = 1;

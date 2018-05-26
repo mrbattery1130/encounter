@@ -12,6 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="?android:attr/actionBarSize"
         android:background="@color/main_color"
+        android:visibility="gone"
         app:layout_collapseMode="pin"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
 
@@ -56,7 +57,8 @@
 
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:scrollbars="none">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -86,8 +88,8 @@
                                 android:id="@+id/iv_cover"
                                 android:layout_width="match_parent"
                                 android:layout_height="160dp"
-                                android:scaleType="centerCrop"
-                                android:background="@drawable/default_cover" />
+                                android:background="@drawable/default_cover"
+                                android:scaleType="centerCrop" />
 
                             <LinearLayout
                                 android:layout_width="wrap_content"
@@ -190,9 +192,84 @@
                         android:layout_gravity="bottom"
                         android:layout_marginBottom="36dp"
                         android:layout_marginLeft="16dp"
-                        android:scaleType="centerCrop"
                         android:background="@drawable/default_avatar"
+                        android:scaleType="centerCrop"
                         app:riv_oval="true" />
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/cv_friend"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginTop="16dp"
+                    android:elevation="2dp"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    app:cardCornerRadius="8dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+
+                            <com.mrbattery.encounter.font.FontTextView
+                                android:id="@+id/tv_appreciating_num"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:text="0"
+                                android:textAllCaps="true"
+                                android:textColor="@color/main_color_dark"
+                                android:textSize="40sp" />
+
+                            <com.mrbattery.encounter.font.FontTextView
+                                android:id="@+id/tv_fans_num"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:text="0"
+                                android:textAllCaps="true"
+                                android:textColor="@color/main_color_dark"
+                                android:textSize="40sp" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:paddingBottom="8dp">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:text="我欣赏的人"
+                                android:textColor="@color/main_color_dark"
+                                android:textSize="@dimen/text_small" />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:text="欣赏我的人"
+                                android:textColor="@color/main_color_dark"
+                                android:textSize="@dimen/text_small" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
                 </android.support.v7.widget.CardView>
 
                 <android.support.v7.widget.CardView
@@ -240,7 +317,8 @@
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="1dp"
-                            android:layout_marginVertical="8dp"
+                            android:layout_marginBottom="8dp"
+                            android:layout_marginTop="8dp"
                             android:background="@color/main_color_dark" />
 
                         <LinearLayout
@@ -393,7 +471,20 @@
                             android:paddingBottom="16dp"
                             android:text="@string/error_no_keyword"
                             android:textColor="@color/text_black"
-                            android:textSize="@dimen/text_big" />
+                            android:textSize="@dimen/text_big"
+                            android:visibility="gone" />
+
+                        <com.google.android.flexbox.FlexboxLayout
+                            android:id="@+id/flexbox"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="-4dp"
+                            android:layout_marginRight="-4dp"
+                            app:alignContent="flex_start"
+                            app:alignItems="center"
+                            app:flexDirection="row"
+                            app:flexWrap="wrap"
+                            app:justifyContent="flex_start" />
                     </LinearLayout>
 
                 </android.support.v7.widget.CardView>

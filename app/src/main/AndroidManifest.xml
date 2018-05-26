@@ -104,7 +104,9 @@
                     android:scheme="rong" />
             </intent-filter>
         </activity>
-        <activity android:name=".EditKeywordActivity"></activity>
+        <activity android:name=".EditKeywordActivity" />
+        <activity android:name=".AppreciatingListActivity" />
+        <activity android:name=".FansListActivity"></activity>
     </application>
 
 </manifest>

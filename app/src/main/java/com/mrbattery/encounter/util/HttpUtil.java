@@ -42,36 +42,22 @@ import static java.security.AccessController.getContext;
 
 public class HttpUtil {
 
-    private static String responseData;
-    private static Bitmap responseBmp;
+    private  String responseData;
 
-    public static String getResponseData() {
+    public  String getResponseData() {
         return responseData;
     }
+
+    private static Bitmap responseBmp;
+
 
     public static Bitmap getResponseBmp() {
         return responseBmp;
     }
 
-    private static String url;
+    private String url;
 
-
-/*    public static String getDataSync(String address){
-        OkHttpClient client = new OkHttpClient.Builder()
-                .connectTimeout(20, TimeUnit.SECONDS)
-                .readTimeout(20, TimeUnit.SECONDS).build();
-        Request request = new Request.Builder().url(address).build();
-        Response response = null;
-        try {
-            response = client.newCall(request).execute();
-            return response.body().string();
-        } catch (IOException e) {
-            e.printStackTrace();
-            return "network_error";
-        }
-    }*/
-
-    public static String getDataSync(String address) {
+/*    public static String getDataSync(String address) {
         url = address;
         new Thread(new Runnable() {
             @Override
@@ -96,9 +82,9 @@ public class HttpUtil {
         }).start();
         return responseData;
 
-    }
+    }*/
 
-    public static void getDataAsync(String address, final Context context, final Runnable runnable) {
+    public void getDataAsync(String address, final Context context, final Runnable runnable) {
         url = address;
         Log.i(TAG, "getDataAsync: 开始创建OkHttpClient对象");
         OkHttpClient client = new OkHttpClient.Builder()//创建OkHttpClient对象
@@ -132,7 +118,7 @@ public class HttpUtil {
         });
     }
 
-    public static void getPictureAsync(String address, final Context context, final Runnable runnable) {
+/*    public static void getPictureAsync(String address, final Context context, final Runnable runnable) {
         url = address;
         OkHttpClient client = new OkHttpClient();//创建OkHttpClient对象
         Request request = new Request.Builder()
@@ -154,9 +140,9 @@ public class HttpUtil {
 
             }
         });
-    }
+    }*/
 
-    public static User parseJSONWithGSON(String responseData) {
+/*    public static User parseJSONWithGSON(String responseData) {
         //使用轻量级的Gson解析得到的json
         Gson gson = new Gson();
         if (responseData.equals("network_error")) {
@@ -171,9 +157,9 @@ public class HttpUtil {
             return u;
         }
 
-    }
+    }*/
 
-    public static ArrayList<MatchedUser> parseJSONListWithGSON() {
+/*    public static ArrayList<MatchedUser> parseJSONListWithGSON() {
         Gson gson = new Gson();
         if (responseData.equals("network_error")) {
             return null;
@@ -185,6 +171,6 @@ public class HttpUtil {
             }
             return matchedUsers;
         }
-    }
+    }*/
 
 }
