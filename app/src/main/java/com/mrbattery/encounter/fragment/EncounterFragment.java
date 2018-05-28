@@ -113,7 +113,7 @@ public class EncounterFragment extends Fragment {
                 recyclerView.setAdapter(adapter);
                 //停止刷新
                 swipeRefreshWidget.setRefreshing(false);
-                Toast.makeText(getContext(), "刷新完成", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "加载完成", Toast.LENGTH_SHORT).show();
                 Log.i(TAG, "run: 刷新完成");
             }
         });

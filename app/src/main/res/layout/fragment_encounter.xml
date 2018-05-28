@@ -24,6 +24,10 @@
             android:orientation="vertical" />
 
     </android.support.v4.widget.SwipeRefreshLayout>
-
-
+    <!--底部栏投影-->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="4dp"
+        android:layout_gravity="bottom"
+        android:background="@drawable/shadow10" />
 </FrameLayout>

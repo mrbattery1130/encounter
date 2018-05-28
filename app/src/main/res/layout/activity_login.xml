@@ -13,7 +13,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:paddingLeft="40dp"
-        android:paddingRight="40dp">
+        android:paddingRight="40dp"
+        android:scrollbarThumbVertical="@android:color/transparent"
+        android:scrollbars="vertical">
 
         <LinearLayout
             android:id="@+id/email_login_form"
@@ -102,8 +104,8 @@
                 style="?android:attr/borderlessButtonStyle"
                 android:layout_width="match_parent"
                 android:layout_height="40sp"
-                android:layout_marginTop="16dp"
                 android:layout_marginBottom="16dp"
+                android:layout_marginTop="16dp"
                 android:background="@drawable/sign_up_btn"
                 android:text="@string/action_sign_up"
                 android:textColor="@color/main_color_dark"

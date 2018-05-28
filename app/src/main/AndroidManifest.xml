@@ -70,9 +70,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".UserDetailActivity"
-            android:label="详细资料" />
+        <activity android:name=".UserDetailActivity" />
         <activity android:name=".EditProfileActivity" />
         <activity android:name=".RegisterNameActivity" />
         <activity android:name=".RegisterPasswordActivity" />

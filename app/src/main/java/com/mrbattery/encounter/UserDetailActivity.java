@@ -1,7 +1,9 @@
 package com.mrbattery.encounter;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -62,6 +64,11 @@ public class UserDetailActivity extends AppCompatActivity {
 
     Context context;
 
+    private ProgressDialog progressDialog;
+    private boolean profileLoaded;
+    private boolean keywordLoaded;
+    private boolean appreciateLoaded;
+
     //当前页面对应的用户
     User user;
 
@@ -79,6 +86,11 @@ public class UserDetailActivity extends AppCompatActivity {
         user = (User) getIntent().getSerializableExtra("user");
         Constant.setCurrConstellation(user.getConstellation());
 
+        profileLoaded = false;
+        keywordLoaded = false;
+        appreciateLoaded = false;
+
+        buildProgressDialog(R.string.notice_loading_data);
         loadProfile();
         loadKeyword();
         loadAppreciate();
@@ -109,6 +121,11 @@ public class UserDetailActivity extends AppCompatActivity {
                 //加载封面图片资源
                 String coverUrl = user.getCover();
                 Picasso.get().load(coverUrl).into(ivCover);
+
+                profileLoaded = true;
+                if (keywordLoaded && keywordLoaded) {
+                    cancelProgressDialog();
+                }
             }
         });
     }
@@ -134,6 +151,11 @@ public class UserDetailActivity extends AppCompatActivity {
                         break;
                     default:
                         break;
+                }
+
+                appreciateLoaded = true;
+                if (profileLoaded && keywordLoaded) {
+                    cancelProgressDialog();
                 }
             }
         });
@@ -181,6 +203,11 @@ public class UserDetailActivity extends AppCompatActivity {
                         keywordDisplay = getString(R.string.error_no_keyword);
                     }
                     tvKeywords.setText(keywordDisplay);
+                }
+
+                keywordLoaded = true;
+                if (profileLoaded && appreciateLoaded) {
+                    cancelProgressDialog();
                 }
             }
         });
@@ -269,4 +296,30 @@ public class UserDetailActivity extends AppCompatActivity {
     public void goBack() {
         finish();
     }
+
+
+    /**
+     * 加载框
+     */
+    public void buildProgressDialog(int id) {
+        if (progressDialog == null) {
+            progressDialog = new ProgressDialog(UserDetailActivity.this);
+            progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        }
+        progressDialog.setMessage(getString(id));
+        progressDialog.setCancelable(false);
+        progressDialog.show();
+    }
+
+    /**
+     * @Description: TODO 取消加载框
+     */
+    public void cancelProgressDialog() {
+        if (progressDialog != null)
+            if (progressDialog.isShowing()) {
+                progressDialog.dismiss();
+            }
+    }
+
+
 }
